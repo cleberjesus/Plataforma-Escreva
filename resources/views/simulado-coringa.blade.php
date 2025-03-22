@@ -1,134 +1,107 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulado Coringa</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        .container {
-            text-align: center;
-            margin-top: 50px;
-        }
-        .motivational-text {
-            font-size: 20px;
-            margin-top: 20px;
-            color: green;
-            text-align: left;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .timer-container {
-            margin-top: 20px;
-            position: relative;
-            display: inline-block;
-        }
-        .timer {
-            font-size: 3rem;
-            width: 150px;
-            height: 150px;
-            border: 10px solid #4CAF50;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: #fff;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .theme {
-            font-size: 1.5rem;
-            margin-top: 10px;
-        }
-        .image-container img {
-            width: 100%;
-            height: auto;
-            margin-top: 20px;
-        }
-        .start-button {
-            background-color: #4CAF50;
-            color: white;
-            font-size: 1.2rem;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 30px;
-        }
-        .start-button:hover {
-            background-color: #45a049;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Simulado Coringa</h1>
+@extends('layouts.app')
 
-        <div class="theme">
-            <p><strong>Tema:</strong> {{ $tema }}</p>
-        </div>
+@section('content')
+<div class="container mx-auto p-6">
+    <h1 class="text-2xl font-bold text-center mb-4" style="color: white;">Simulado Coringa</h1>
 
-        <div class="motivational-text">
-            @foreach($textosMotivadores as $texto)
-                <p>{{ $texto }}</p>
-            @endforeach
-        </div>
-
-        <div class="image-container">
-            <img src="{{ $imagemBase }}" alt="Imagem do Tema">
-        </div>
-
-        <div class="timer-container">
-            <div id="timer" class="timer">
-                {{ $tempoLimite }}:00
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+        <div class="text-center mb-5">
+            <button id="gerarTema" class="btn btn-primary mb-3">Gerar Tema</button>
+            <div id="resultado" class="p-3 border rounded d-none">
+                <h3><strong>Tema:</strong> <span id="tema"></span></h3>
+                <p><strong>Texto Motivador:</strong> <span id="textoMotivador"></span></p>
             </div>
         </div>
 
-        <!-- Botão para Iniciar o Cronômetro -->
-        <button id="startButton" class="start-button" onclick="startTimer()">Iniciar Cronômetro</button>
+        <div class="text-center mb-3">
+            <div class="circle-timer">
+                <svg id="timerSvg" viewBox="0 0 100 100">
+                    <circle cx="50" cy="50" r="45" stroke="#e9ecef" stroke-width="8" fill="none"></circle>
+                    <circle id="progress" cx="50" cy="50" r="45" stroke="#28a745" stroke-width="8" fill="none"
+                            stroke-dasharray="282.6" stroke-dashoffset="282.6" stroke-linecap="round"></circle>
+                </svg>
+                <div class="timer-text" id="timerText">00:00</div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <button id="iniciarTimer" class="btn btn-success">
+                <i class="bi bi-play-circle-fill" style="font-size: 2rem;"></i>
+                Iniciar Simulado
+            </button>
+        </div>
     </div>
+</div>
 
-    <script>
-        let tempoRestante = {{ $tempoLimite * 60 }};
-        let cronometroAtivo = false;
+<style>
+.circle-timer {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+}
 
-        function formatarTempo(segundos) {
-            const minutos = Math.floor(segundos / 60);
-            const segundosRestantes = segundos % 60;
-            return `${minutos.toString().padStart(2, '0')}:${segundosRestantes.toString().padStart(2, '0')}`;
-        }
+.circle-timer svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
+}
 
-        function startTimer() {
-            if (!cronometroAtivo) {
-                cronometroAtivo = true;
-                const timerElement = document.getElementById('timer');
-                const startButton = document.getElementById('startButton');
-                
-                // Desabilita o botão "Iniciar" após o clique
-                startButton.disabled = true;
-                startButton.textContent = "Cronômetro Iniciado";
+.timer-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+</style>
 
-                const interval = setInterval(() => {
-                    if (tempoRestante > 0) {
-                        tempoRestante--;
-                        timerElement.textContent = formatarTempo(tempoRestante);
-                    } else {
-                        clearInterval(interval);
-                        alert("O tempo acabou!");
-                        // Habilita o botão novamente para reiniciar, caso queira
-                        startButton.disabled = false;
-                        startButton.textContent = "Iniciar Cronômetro";
-                    }
-                }, 1000);
+<script>
+    let tempoTotal = 3600;
+    let tempoRestante = tempoTotal;
+    let intervalo;
+
+    const timerText = document.getElementById('timerText');
+    const progressCircle = document.getElementById('progress');
+
+    function atualizarTimer() {
+        let minutos = Math.floor(tempoRestante / 60).toString().padStart(2, '0');
+        let segundos = (tempoRestante % 60).toString().padStart(2, '0');
+        timerText.textContent = `${minutos}:${segundos}`;
+        let progresso = (tempoRestante / tempoTotal) * 282.6;
+        progressCircle.style.strokeDashoffset = progresso;
+    }
+
+    function iniciarTimer() {
+        atualizarTimer();
+        intervalo = setInterval(() => {
+            if (tempoRestante <= 0) {
+                clearInterval(intervalo);
+                alert('Tempo esgotado!');
+            } else {
+                tempoRestante--;
+                atualizarTimer();
             }
-        }
-    </script>
-</body>
-</html>
+        }, 1000);
+    }
+
+    document.getElementById('iniciarTimer').addEventListener('click', function() {
+        clearInterval(intervalo);
+        tempoRestante = tempoTotal;
+        iniciarTimer();
+    });
+
+    document.getElementById('gerarTema').addEventListener('click', function() {
+        fetch("{{ route('simulado-coringa.gerarTema') }}")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('tema').textContent = data.tema;
+                document.getElementById('textoMotivador').textContent = data.textoMotivador;
+                document.getElementById('resultado').classList.remove('d-none');
+            })
+            .catch(() => alert("Erro ao gerar o tema. Tente novamente."));
+    });
+</script>
+@endsection
