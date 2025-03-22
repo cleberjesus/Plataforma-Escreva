@@ -14,24 +14,24 @@ class RedacaoController extends Controller
         $redacoes = Redacao::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
         return view('redacoes.index', compact('redacoes'));
     }
-
+  
     public function store(Request $request)
     {
-        $request->validate([
+        $request->validate([    
             'tema' => 'required|string|max:255',
             'texto_redacao' => 'nullable|string',
             'imagem_redacao' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'modo_envio' => 'required|in:digitado,imagem',
         ]);
-
+  
         $redacao = new Redacao();
         $redacao->user_id = Auth::id();
         $redacao->tema = $request->tema;
         $redacao->modo_envio = $request->modo_envio;
         $redacao->data = now(); 
-        $redacao->created_at = now(); 
-        $redacao->updated_at = now(); 
-
+        $redacao->created_at = now();    
+        $redacao->updated_at = now();    
+ 
         if ($request->modo_envio === 'digitado') {
             $redacao->texto_redacao = $request->texto_redacao;
         } else {
