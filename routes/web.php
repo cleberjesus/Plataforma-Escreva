@@ -21,9 +21,8 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/simulado-coringa', [SimuladoCoringaController::class, 'index'])->name('simulado-coringa'); 
 Route::get('/simulado-coringa/gerar-tema', [SimuladoCoringaController::class, 'gerarTema'])->name('simulado-coringa.gerarTema');
-
 Route::get('/simulado/finalizar', [SimuladoCoringaController::class, 'finalizarSimulado'])->name('simulado.finalizar');
-Route::get('/simulado-comum', [SimuladoComumController::class, 'index'])->name('simulado-comum');
+Route::get('/simulado-comum', [SimuladoComumController::class, 'index'])->name('simulado-comum'); 
 
 
 require __DIR__.'/auth.php';
