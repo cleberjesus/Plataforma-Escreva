@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                        {{ __('Painel') }}
                     </x-nav-link>
 
                     <!-- Link para Simulado Coringa com Ícone -->
@@ -24,9 +24,15 @@
 
                     <!-- Link para Simulado Comum com Ícone -->
                     <x-nav-link :href="route('simulado-comum')" :active="request()->routeIs('simulado-comum')">
-                    <img src="/icons/open-book.png" alt="Ícone do Simulado Coringa" class="h-6 w-6 inline-block mr-1" />
+                    <img src="/icons/open-book.png" alt="Ícone do Simulado Comum" class="h-6 w-6 inline-block mr-1" />
                         {{ __('Simulado Comum') }}
                     </x-nav-link>
+
+                    <<x-nav-link :href="route('redacoes.index')" :active="request()->routeIs('redacoes.index')">
+                    <img src="/icons/escreva.png" alt="Ícone de Minhas Redações" class="h-6 w-6 inline-block mr-1" />
+                    {{ __('Minhas Redações') }}
+                    </x-nav-link>
+                  
                 </div>
             </div>
 
