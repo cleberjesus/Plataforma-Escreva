@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SimuladoCoringaController;
 use App\http\Controllers\SimuladoComumController;
 use App\Http\Controllers\RedacaoController;
+use App\Http\Controllers\RankingController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,6 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/ranking', [RankingController::class, 'index'])->name('ranking.index');
+    Route::get('/minhas-conquistas', [AchievementsController::class, 'index'])->name('achievements.index');
     
 });
 
