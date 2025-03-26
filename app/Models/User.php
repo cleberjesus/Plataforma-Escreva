@@ -9,6 +9,16 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public function achievements()
+{
+    return $this->belongsToMany(Achievement::class)->withTimestamps()->withPivot('achieved_at');
+}
+
+     function redacoes()  
+    {
+    return $this->hasMany(Redacao::class, 'user_id');
+    }
+
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
