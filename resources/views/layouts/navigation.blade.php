@@ -32,6 +32,11 @@
                     <img src="/icons/escreva.png" alt="Ícone de Minhas Redações" class="h-6 w-6 inline-block mr-1" />
                     {{ __('Minhas Redações') }}
                     </x-nav-link>
+
+                    <<x-nav-link :href="route('ranking.index')" :active="request()->routeIs('ranking.index')">
+                    <img src="/icons/escreva.png" alt="Ícone de Minhas Redações" class="h-6 w-6 inline-block mr-1" />
+                    {{ __('Ranking') }}
+                    </x-nav-link>
                   
                 </div>
             </div>

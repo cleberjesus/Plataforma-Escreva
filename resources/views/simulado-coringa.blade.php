@@ -13,6 +13,16 @@
             </div>
         </div>
 
+        <div class="text-center mb-4">
+            <label for="nivel" class="form-label">Selecione o nível do usuário:</label>
+            <select id="nivel" class="form-select w-50 mx-auto">
+                <option value="">-- Escolha seu nível --</option>
+                <option value="3600">Iniciante (1 hora)</option>
+                <option value="2100">Intermediário (35 minutos)</option>
+                <option value="1200">Avançado (20 minutos)</option>
+            </select>
+        </div>
+
         <div class="text-center mb-3">
             <div class="circle-timer">
                 <svg id="timerSvg" viewBox="0 0 100 100">
@@ -25,11 +35,20 @@
         </div>
 
         <div class="text-center">
-            <button id="iniciarTimer" class="btn btn-success">
+            <button id="iniciarTimer" class="btn btn-success" disabled>
                 <i class="bi bi-play-circle-fill" style="font-size: 2rem;"></i>
                 Iniciar Simulado
             </button>
         </div>
+    </div>
+</div>
+
+<div id="toast" class="toast align-items-center text-bg-info border-0 position-fixed bottom-0 end-0 p-3" role="alert" aria-live="assertive" aria-atomic="true" style="display: none;">
+    <div class="d-flex">
+        <div class="toast-body">
+            Por favor, selecione o nível para começar o simulado.
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
 </div>
 
@@ -59,12 +78,20 @@
 </style>
 
 <script>
-    let tempoTotal = 3600;
+    let tempoTotal = 3600; // Tempo inicial padrão
     let tempoRestante = tempoTotal;
     let intervalo;
 
     const timerText = document.getElementById('timerText');
     const progressCircle = document.getElementById('progress');
+    const nivelSelect = document.getElementById('nivel');
+    const toast = document.getElementById('toast');
+    const iniciarBtn = document.getElementById('iniciarTimer');
+
+    // Exibir toast ao carregar a página
+    window.onload = function () {
+        exibirToast();
+    };
 
     function atualizarTimer() {
         let minutos = Math.floor(tempoRestante / 60).toString().padStart(2, '0');
@@ -87,13 +114,30 @@
         }, 1000);
     }
 
-    document.getElementById('iniciarTimer').addEventListener('click', function() {
+    function exibirToast() {
+        toast.style.display = 'block';
+        setTimeout(() => {
+            toast.style.display = 'none';
+        }, 5000);
+    }
+
+    nivelSelect.addEventListener('change', function () {
+        if (this.value) {
+            tempoTotal = parseInt(this.value);
+            tempoRestante = tempoTotal;
+            atualizarTimer();
+            iniciarBtn.disabled = false; // Habilitar o botão de iniciar
+        } else {
+            iniciarBtn.disabled = true;
+        }
+    });
+
+    iniciarBtn.addEventListener('click', function () {
         clearInterval(intervalo);
-        tempoRestante = tempoTotal;
         iniciarTimer();
     });
 
-    document.getElementById('gerarTema').addEventListener('click', function() {
+    document.getElementById('gerarTema').addEventListener('click', function () {
         fetch("{{ route('simulado-coringa.gerarTema') }}")
             .then(response => response.json())
             .then(data => {
