@@ -9,10 +9,6 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    public function achievements()
-{
-    return $this->belongsToMany(Achievement::class)->withTimestamps()->withPivot('achieved_at');
-}
 
      function redacoes()  
     {

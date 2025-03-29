@@ -52,9 +52,7 @@ class SimuladoCoringaController extends Controller
     }
 
     public function index()
-{
-    return view('simulado-coringa');
-}
-
-
+    {
+        return view('simulado-coringa');
+    }
 }
