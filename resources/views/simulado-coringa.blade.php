@@ -32,9 +32,14 @@
     </div>
 </div>
 
-
+<!-- Modal Avaliação de Nível -->
 <div class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50" id="nivelModal">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-96">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-96 relative">
+        <!-- Ícone de Fechar fora do formulário -->
+        <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none">
+            <i class="bi bi-x-circle" style="font-size: 1.5rem;"></i> <!-- Ícone de "X" -->
+        </button>
+
         <h5 class="text-lg font-semibold text-center mb-4">Avaliação de Nível</h5>
         <form id="nivelForm">
             <div class="mb-3">
@@ -145,6 +150,18 @@
                 document.getElementById('resultado').classList.remove('d-none');
             })
             .catch(() => toastr.error("Erro ao gerar o tema. Tente novamente.", "Erro"));
+    });
+
+    // Fechar o modal de avaliação de nível ao clicar no ícone de "X"
+    document.getElementById('closeModal').addEventListener('click', function() {
+        document.getElementById('nivelModal').style.display = 'none';
+    });
+
+    // Fechar o modal ao clicar fora do formulário (fundo do modal)
+    document.getElementById('nivelModal').addEventListener('click', function(event) {
+        if (event.target === this) {
+            document.getElementById('nivelModal').style.display = 'none';
+        }
     });
 </script>
 @endsection
