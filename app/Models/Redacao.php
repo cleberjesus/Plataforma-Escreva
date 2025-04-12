@@ -10,8 +10,8 @@ class Redacao extends Model
     use HasFactory;
     protected $table = 'redacoes';
 
-    protected $fillable = ['tema','modo_envio', 'texto_redacao', 'imagem_redacao', 'data'];
-
-    protected $dates = ['created_at', 'updated_at', 'data'];
+    protected $fillable = ['tema','modo_envio', 'texto_redacao', 'imagem_redacao'];
+    protected $dates = ['created_at', 'updated_at'];
+    
 
 }
