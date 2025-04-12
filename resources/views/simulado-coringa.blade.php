@@ -97,7 +97,7 @@
 </div>
 
 <!-- ÁUDIO DA CONTAGEM -->
-<audio id="audioContagem" src="{{ asset('sounds/contagem.wav') }}"></audio>
+<audio id="audioContagem" src="{{ asset('sounds/countdowngame.mp3') }}"></audio>
 
 <script>
     let tempoTotal = 3600;
