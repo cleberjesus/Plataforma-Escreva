@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssinaturaController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SimuladoCoringaController;
@@ -43,5 +44,8 @@ Route::post('/redacoes', [RedacaoController::class, 'store'])->name('redacoes.st
 
 Route::post('/simulado/iniciar', [SimuladoCoringaController::class, 'iniciar'])->name('simulado.iniciar');
 
+Route::middleware(['auth'])->group(function () {
+    Route::get('/assinar', [AssinaturaController::class, 'assinar'])->name('assinar.premium');
+});
 
 require __DIR__.'/auth.php';
