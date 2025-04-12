@@ -5,7 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', default: 'Laravel') }}</title>
+
+        <!-- Favicon -->
+        <link rel="icon" href="{{ asset('logoico.ico') }}" type="image/x-icon">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -33,3 +36,4 @@
             </main>
         </div>
     </body>
+</html>
