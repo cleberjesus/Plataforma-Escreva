@@ -49,3 +49,10 @@ Route::middleware(['auth'])->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::get('/redacoes', [RedacaoController::class, 'index'])->name('redacoes.index');
+Route::post('/redacoes', [RedacaoController::class, 'store'])->name('redacoes.store');
+Route::delete('/redacoes/{id}', [RedacaoController::class, 'destroy'])->name('redacoes.destroy');
+
+Route::get('/redacoes/{id}/edit', [RedacaoController::class, 'edit'])->name('redacoes.edit');
+Route::put('/redacoes/{id}', [RedacaoController::class, 'update'])->name('redacoes.update');
