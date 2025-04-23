@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SimuladoCoringaController;
 use App\Http\Controllers\SimuladoComumController;
 use App\Http\Controllers\RedacaoController;
+use App\Http\Controllers\LeiaController;
+use App\Http\Controllers\CronogramaController;
+
+
 
 
 Route::get('/', function () {
@@ -56,3 +60,20 @@ Route::delete('/redacoes/{id}', [RedacaoController::class, 'destroy'])->name('re
 
 Route::get('/redacoes/{id}/edit', [RedacaoController::class, 'edit'])->name('redacoes.edit');
 Route::put('/redacoes/{id}', [RedacaoController::class, 'update'])->name('redacoes.update');
+
+
+Route::get('/leituras', [LeiaController::class, 'mostrarLeituras'])
+     ->name('leituras');
+
+
+
+Route::middleware('auth')->group(function () {
+    // Rota para exibir o cronograma
+    Route::get('/cronograma', [CronogramaController::class, 'index'])->name('cronograma.index');
+
+    // Rota para armazenar um novo cronograma
+    Route::post('/cronograma', [CronogramaController::class, 'store'])->name('cronograma.store');
+
+    // Rota para excluir um cronograma
+    Route::delete('/cronograma/{id}', [CronogramaController::class, 'destroy'])->name('cronograma.destroy');
+});
