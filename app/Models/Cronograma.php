@@ -23,4 +23,10 @@ class Cronograma extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    // Relacionamento com as atividades do cronograma
+    public function atividades()
+    {
+        return $this->hasMany(CronogramaAtividade::class);
+    }
 }
