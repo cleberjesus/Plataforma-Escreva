@@ -8,6 +8,7 @@ use App\Http\Controllers\SimuladoComumController;
 use App\Http\Controllers\RedacaoController;
 use App\Http\Controllers\LeiaController;
 use App\Http\Controllers\CronogramaController;
+use App\Http\Controllers\CronogramaAtividadeController;
 
 
 
@@ -65,15 +66,18 @@ Route::put('/redacoes/{id}', [RedacaoController::class, 'update'])->name('redaco
 Route::get('/leituras', [LeiaController::class, 'mostrarLeituras'])
      ->name('leituras');
 
-
-
-Route::middleware('auth')->group(function () {
-    // Rota para exibir o cronograma
-    Route::get('/cronograma', [CronogramaController::class, 'index'])->name('cronograma.index');
-
-    // Rota para armazenar um novo cronograma
-    Route::post('/cronograma', [CronogramaController::class, 'store'])->name('cronograma.store');
-
-    // Rota para excluir um cronograma
-    Route::delete('/cronograma/{id}', [CronogramaController::class, 'destroy'])->name('cronograma.destroy');
-});
+     Route::middleware('auth')->prefix('cronograma')->group(function () {
+        // CRUD do cronograma
+        Route::get('/', [CronogramaController::class, 'index'])->name('cronograma.index');
+        Route::post('/', [CronogramaController::class, 'store'])->name('cronograma.store');
+        Route::delete('/{cronograma}', [CronogramaController::class, 'destroy'])->name('cronograma.destroy');
+    
+        // Atividades relacionadas
+        Route::get('{cronograma}/atividades', [CronogramaAtividadeController::class, 'index'])
+            ->name('cronograma.atividades.index');
+        Route::post('{cronograma}/atividades', [CronogramaAtividadeController::class, 'store'])
+            ->name('cronograma.atividades.store');
+        Route::delete('{cronograma}/atividades/{atividade}', [CronogramaAtividadeController::class, 'destroy'])
+            ->name('cronograma.atividades.destroy');
+    });
+    
