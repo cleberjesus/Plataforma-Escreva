@@ -136,8 +136,6 @@
         <a href="#">Início</a>
         <a href="#">Como Funciona</a>
         <a href="#">Planos</a>
-        <a href="#">Temas</a>
-
         @if (Route::has('login'))
             @auth
                 <a href="{{ url('/dashboard') }}" class="btn">
@@ -191,18 +189,22 @@
 <section class="plans">
     <div class="plan-card">
         <h3>Plano Grátis</h3>
-        <p>Corrige 1 redação por semana</p>
+        <ul>
+            <li>Simulado Coringa</li>
+            <li>Correções Comum</li>
+            <li>Minhas Redações</li>
+        </ul>
     </div>
+    
     <div class="plan-card">
-        <h3>Mensal Premium</h3>
-        <p><strong>R$ 19,90</strong> / mês</p>
-        <p>Acesso ilimitado a correções</p>
+        <h3>Plano Premium</h3>
+        <p><strong>R$ 9,90</strong> / mês</p>
+        <ul>
+            <li>Acesso ilimitado a correções ilimitadas com IA</li>
+        </ul>
     </div>
-    <div class="plan-card">
-        <h3>Anual Premium</h3>
-        <p><strong>R$ 149,90</strong> / ano</p>
-        <p>(com desconto exclusivo)</p>
-    </div>
+    
+   
 </section>
 
 <footer>
