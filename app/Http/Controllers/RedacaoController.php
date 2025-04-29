@@ -11,7 +11,10 @@ class RedacaoController extends Controller
 {
     public function index(Request $request)
     {
-        $redacoes = Redacao::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+        $redacoes = Redacao::where('user_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         $redacaoEditando = null;
 
         if ($request->has('edit')) {
@@ -27,20 +30,48 @@ class RedacaoController extends Controller
     {
         $request->validate([
             'tema' => 'required|string|max:255',
+            'modo_envio' => 'required|in:digitado,imagem',
             'texto_redacao' => 'nullable|string',
             'imagem_redacao' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'modo_envio' => 'required|in:digitado,imagem',
         ]);
 
         if ($request->has('redacao_id')) {
-            $redacao = Redacao::where('id', $request->redacao_id)
-                ->where('user_id', Auth::id())->firstOrFail();
-        } else {
-            $redacao = new Redacao();
-            $redacao->user_id = Auth::id();
-            $redacao->created_at = now();
-            $redacao->data = now();
+            return $this->update($request, $request->redacao_id);
         }
+
+        $redacao = new Redacao();
+        $redacao->user_id = Auth::id();
+        $redacao->created_at = now();
+        $redacao->data = now();
+        $redacao->tema = $request->tema;
+        $redacao->modo_envio = $request->modo_envio;
+
+        if ($request->modo_envio === 'digitado') {
+            $redacao->texto_redacao = $request->texto_redacao;
+        } else {
+            if ($request->hasFile('imagem_redacao')) {
+                $path = $request->file('imagem_redacao')->store('redacoes', 'public');
+                $redacao->imagem_redacao = $path;
+            }
+        }
+
+        $redacao->save();
+
+        return redirect()->route('redacoes.index')->with('success', 'Redação salva com sucesso!');
+    }
+
+    public function update(Request $request, $id)
+    {
+        $redacao = Redacao::where('id', $id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
+
+        $request->validate([
+            'tema' => 'required|string|max:255',
+            'modo_envio' => 'required|in:digitado,imagem',
+            'texto_redacao' => 'nullable|string',
+            'imagem_redacao' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
         $redacao->tema = $request->tema;
         $redacao->modo_envio = $request->modo_envio;
@@ -48,7 +79,11 @@ class RedacaoController extends Controller
 
         if ($request->modo_envio === 'digitado') {
             $redacao->texto_redacao = $request->texto_redacao;
-            $redacao->imagem_redacao = null;
+
+            if ($redacao->imagem_redacao) {
+                Storage::disk('public')->delete($redacao->imagem_redacao);
+                $redacao->imagem_redacao = null;
+            }
         } else {
             if ($request->hasFile('imagem_redacao')) {
                 if ($redacao->imagem_redacao) {
@@ -62,12 +97,14 @@ class RedacaoController extends Controller
 
         $redacao->save();
 
-        return redirect()->route('redacoes.index')->with('success', $request->has('redacao_id') ? 'Redação atualizada com sucesso!' : 'Redação salva com sucesso!');
+        return redirect()->route('redacoes.index')->with('success', 'Redação atualizada com sucesso!');
     }
 
     public function destroy($id)
     {
-        $redacao = Redacao::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+        $redacao = Redacao::where('id', $id)
+            ->where('user_id', Auth::id())
+            ->firstOrFail();
 
         if ($redacao->imagem_redacao) {
             Storage::disk('public')->delete($redacao->imagem_redacao);
