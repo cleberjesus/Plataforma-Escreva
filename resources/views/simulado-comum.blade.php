@@ -8,8 +8,8 @@
         <label for="tema" class="block font-medium text-lg">Escolha um tema:</label>
         <select id="tema" class="mt-2 p-2 border rounded w-full" onchange="exibirTextoMotivador()">
             <option value="">Selecione um tema...</option>
-            @foreach ($temas as $tema)
-                <option value="{{ $tema }}">{{ $tema }}</option>
+            @foreach ($temas as $slug => $tema)
+                <option value="{{ $slug }}">{{ $tema['titulo'] }}</option>
             @endforeach
         </select>
 
@@ -33,7 +33,8 @@
 </div>
 
 <script>
-    let textosMotivadores = @json($textosMotivadores);
+    // Os textos estão organizados por slug
+    let textosMotivadores = @json(array_map(fn($t) => $t['textos'], $temas));
     let tempo = 0;
     let timerAtivo = false;
     let timerInterval;
@@ -44,7 +45,7 @@
         let motivadorContent = document.getElementById("motivadorContent");
         let iniciarSimulado = document.getElementById("iniciarSimulado");
 
-        if (temaSelecionado) {
+        if (temaSelecionado && textosMotivadores[temaSelecionado]) {
             let textos = textosMotivadores[temaSelecionado];
             motivadorContent.textContent = textos[Math.floor(Math.random() * textos.length)];
             motivadorDiv.classList.remove("hidden");
