@@ -42,6 +42,8 @@ Route::get('/simulado-coringa/finalizar', [SimuladoCoringaController::class, 'fi
 
 
 Route::get('/simulado-comum', [SimuladoComumController::class, 'index'])->name('simulado-comum');
+Route::get('/simulado/{tema}', [SimuladoComumController::class, 'mostrarTema'])->name('simulado.tema');
+
 
 Route::get('/redacoes', [RedacaoController::class, 'index'])->name('redacoes.index');
 Route::post('/redacoes', [RedacaoController::class, 'store'])->name('redacoes.store');
