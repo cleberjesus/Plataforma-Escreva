@@ -11,7 +11,8 @@ class SimuladoComumController extends Controller
     {
         $temas = $this->getTemas();
 
-        return view('simulado-comum', compact('temas'));
+        return view('simulado-comum.index', compact('temas'));
+
     }
 
     // Página específica de um tema
@@ -19,25 +20,24 @@ class SimuladoComumController extends Controller
     {
         $temas = $this->getTemas();
 
-        // Verifica se o slug existe
         if (!array_key_exists($slug, $temas)) {
             abort(404, 'Tema não encontrado');
         }
 
-        $temaSelecionado = $temas[$slug];
-        $textosMotivadores = $temaSelecionado['textos'];
-        $charges = $temaSelecionado['charges'] ?? [];
+        $tema = $temas[$slug];
+        $textosMotivadores = $tema['textos'];
+        $charges = $tema['charges'] ?? [];
 
-        return view('simulado-tema', compact('slug', 'temaSelecionado', 'textosMotivadores', 'charges'));
+        return view('simulado-comum.tema', compact('slug', 'tema', 'textosMotivadores', 'charges'));
     }
 
-    // Dados dos temas organizados por slug (URL amigável)
+    // Dados dos temas organizados por slug
     private function getTemas()
     {
         return [
             'redes-sociais' => [
                 'titulo' => 'O impacto das redes sociais na sociedade moderna',
-                'imagem' => 'redes-sociais.jpg',
+                'imagem' => 'redes-sociais-vida-moderna.jpg',
                 'textos' => [
                     "A internet permitiu uma comunicação global instantânea, mas será que estamos realmente mais conectados?",
                     "As redes sociais revolucionaram a maneira como interagimos, mas trouxeram desafios como a desinformação e a dependência digital."
@@ -49,7 +49,7 @@ class SimuladoComumController extends Controller
             ],
             'sustentabilidade-cidades' => [
                 'titulo' => 'Os desafios da sustentabilidade nas grandes cidades',
-                'imagem' => 'sustentabilidade.jpg',
+                'imagem' => 'sustentabilidade-cidades-grandes.jpg',
                 'textos' => [
                     "Com o crescimento das cidades, encontrar soluções sustentáveis se tornou essencial para o futuro do planeta.",
                     "A poluição e o desperdício de recursos são problemas críticos. Como as cidades podem ser mais verdes?"
