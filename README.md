@@ -1,70 +1,49 @@
-<<<<<<< HEAD
-# Plantaforma-Escreva
-=======
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📝 Plataforma Escreva
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Objetivo:**  
+Ajudar estudantes que estão se preparando para vestibulares a praticar e melhorar suas redações por meio de simulados, correções com inteligência artificial e um sistema de armazenamento acessível e eficiente.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## ✨ Funcionalidades
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### 🃏 Simulado Coringa  
+- Geração aleatória de temas de redação para estimular a criatividade e preparo em diferentes áreas.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 📚 Simulado Comum  
+- Temas de redação baseados em vestibulares anteriores e temas atuais recorrentes com o tempo ilimitado.
 
-## Learning Laravel
+### 🤖 Correção com IA  
+- Correção automatizada de redações com base nos critérios do ENEM.  
+- Exibição de nota por competência (de 0 a 200 pontos por critério, totalizando até 1000).  
+- Suporte a redações:
+  - **Digitadas diretamente na plataforma**
+  - **Enviadas como imagem**, com uso de OCR para extração do texto.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 🗂️ Armazenamento de Redações  
+- Salvamento e organização de redações escritas ou escaneadas.  
+- Histórico de desempenho disponível para consulta futura.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🔧 Tecnologias Utilizadas
 
-## Laravel Sponsors
+- **Laravel** – Framework backend PHP para estrutura MVC.  
+- **Blade** – Sistema de templates com componentes reutilizáveis.  
+- **OCR** – Reconhecimento Óptico de Caracteres para leitura de imagens.  
+- **IA (Inteligência Artificial)** – Correção automática das redações com base nos critérios do ENEM.
+- **MySQL** - Banco de dados relacional para armazenar usuários, temas, redações e notas.
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## 🚀 Futuras Implementações
 
-### Premium Partners
+- Sistema de ranking entre usuários.  
+- Feedback detalhado com sugestões de melhoria.  
+- Gamificação para estimular prática recorrente.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+---
 
-## Contributing
+## 📌 Observações
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Este projeto está em desenvolvimento e busca oferecer uma ferramenta prática, acessível e pedagógica para milhares de estudantes que enfrentam a etapa desafiadora da redação nos vestibulares brasileiros.
 
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
->>>>>>> 5a69879 (Commit Inicial)
