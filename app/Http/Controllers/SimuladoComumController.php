@@ -37,7 +37,7 @@ class SimuladoComumController extends Controller
         return [
             'trabalho-de-cuidado' => [
                 'titulo' => 'Desafios para o enfrentamento da invisibilidade do trabalho de cuidado realizado pela mulher no Brasil',
-                'imagem' => 'invisibilidade-do-trabalho-de-cuidado-da-mulher.png',
+                'imagem' => 'invisibilidade-do-trabalho-de-cuidado-da-mulher.jpg',
                 'textos' => [
                     "O trabalho de cuidado não remunerado e mal pago e a crise global da desigualdade
 
@@ -59,7 +59,7 @@ Disponível em: https://repositorio.ipea.gov.br/handle/11058/7412 (adaptado).
             ],
             'viver-em-rede' => [
                 'titulo' => 'Viver em rede no século XXI: os limites entre o público e o privado',
-                'imagem' => 'viver-em-rede.jpg',
+                'imagem' => 'viver-em-rede-seculo-xxi.jpeg',
                 'textos' => [
                     "Texto 1:
 
@@ -83,35 +83,10 @@ http://educacao.globo.com/portugues/assunto/redacao/enem-2011-tema-da-redacao.ht
                 ],
                 'charges' => []
             ],
-            'publicidade-infantil' => [
-                'titulo' => 'Publicidade infantil em questão no Brasil',
-                'imagem' => 'publicidade-infantil.jpg', // Atualize conforme a imagem real
-                'textos' => [
-                    "Texto 1:
-
-POR QUE AS CRIANÇAS FICAM OBCECADAS COM VÍDEOS DE UNBOXING?
-
-Sabrina Ongaratto
-Enquanto os adultos ainda tentam entender o que há de tão atraente em ver alguém abrindo um novo brinquedo, as crianças estão cada vez mais obcecadas. Esse tipo de vídeo, batizado como unboxing, é bastante popular entre os pequenos e os youtubers já sacaram isso. Tanto que alguns já são “especializados” e até são pagos para abrir produtos de fabricantes.
-[...] Para a pedagoga e especialista em rotina infantil, Camila Lavagnoli (ES), os unboxing envolvem o principal interesse da criança, que é o brincar. [...] “O problema reside na criança se envolver diariamente com este tipo de conteúdo de forma despropositada, pois se torna uma forma de estímulo ao consumo: crianças amam novidades e provavelmente se o seu pequeno assiste a esse tipo de vídeo constantemente, você já deve ter recebido alguns pedidos para a compra de itens que ele conheceu ali”, alertou Camila. Mas, segundo a pedagoga, as consequências vão além do consumismo. “A criança pode tornar-se ansiosa e inquieta, com uma sensação de incompletude”, disse ela. Isto é, aquela ideia de que ela não tem tudo o que quer.
-
-Revista Crescer, Comportamento, Rio de Janeiro, 21 dez. 2018. Acesso em: 11 jul. 2020. Acesso em: 11 jul. 2020. Disponível em: https://revistacrescer.globo.com/Criancas/comportamento/noticia/2018/12/por-que- -criancas-ficam-obcecadas-com-videos-de-unboxing.html.
-",
-
-                    "Texto 2:
-
-A aprovação, em abril de 2014, de uma resolução que considera abusiva a publicidade infantil, emitida pelo Conselho Nacional de Direitos da Criança e do Adolescente (Conanda), deu início a um verdadeiro cabo de guerra envolvendo ONGs de defesa dos direitos das crianças e setores interessados na continuidade das propagandas dirigidas a esse público.
-Elogiada por pais, ativistas e entidades, a resolução estabelece como abusiva toda propaganda dirigida à criança que tem “a intenção de persuadi-la para o consumo de qualquer produto ou serviço” e que utilize aspectos como desenhos animados, bonecos, linguagem infantil, trilhas sonoras com temas infantis, oferta de prêmios, brindes ou artigos colecionáveis que tenham apelo às crianças.
-Ainda há dúvidas, porém, sobre como será a aplicação prática da resolução. E associações de anunciantes, emissoras, revistas e de empresas de licenciamento e fabricantes de produtos infantis criticam a medida e dizem não reconhecer a legitimidade constitucional do Conanda para legislar sobre publicidade e para impor a resolução tanto às famílias quanto ao mercado publicitário. Além disso, defendem que a auto-regulamentação pelo Conselho Nacional de Auto-regulamentação Publicitária (Conar) já seria uma forma de controlar e evitar abusos.
-
-IDOETA, P. A.; BARBA, M. D. A publicidade infantil deve ser proibida? Acesso em: 23 maio 2014 (adaptado). Disponível em: www.bbc.co.uk.
-"
-                ],
-                'charges' => []
-            ],
+            
             'cinema-no-brasil' => [
                 'titulo' => 'Democratização do acesso ao cinema no Brasil',
-                'imagem' => 'democratizacao-cinema.jpg', // Substitua pelo nome real da imagem, se houver
+                'imagem' => 'democratizacao-acesso-cinema.jpeg', 
                 'textos' => [
                     "Texto 1:
 
@@ -130,7 +105,7 @@ GUTFREIND, C. F. O filme e a representação do real. E-Compós, v. 6, 11, 2006 
             ],
             'imigracao-brasil' => [
                 'titulo' => 'O movimento imigratório para o Brasil no século XXI',
-                'imagem' => 'movimento-imigratorio.jpg',
+                'imagem' => 'movimento-imigratorio-brasil-seculo-xxi.jpeg',
                 'textos' => [
                     "Texto 1:
 
@@ -152,8 +127,8 @@ Disponível em: http://www.dpf.gov.br. Acesso em: 19 jul. 2012 (adaptado).
             ],
             'lei-seca' => [
                 'titulo' => 'Efeitos da implementação da Lei Seca no Brasil',
-                'imagem' => 'lei-seca.jpg',
-                'textos' => [
+                'imagem' => 'lei-seca-brasil.jpeg', 
+                'textos' => [ 
                     "Texto 1:
 Qual o objetivo da “Lei Seca ao volante”?
 De acordo com a Associação Brasileira de Medicina de Tráfego (Abramet), a utilização de bebidas alcoólicas é responsável por 30% dos acidentes de trânsito. E metade das mortes, segundo o Ministério da Saúde, está relacionada ao uso do álcool por motoristas. Diante deste cenário preocupante, a Lei 11.705/2008 surgiu com uma enorme missão: alertar a sociedade para os perigos do álcool associado à direção.
@@ -173,7 +148,7 @@ Disponível em: www.operacaoleisecarj.rj.gov.br. Acesso em: 20 jun. 2013 (adapta
             ],
             'violencia-mulher' => [
                 'titulo' => 'A persistência da violência contra a mulher na sociedade brasileira',
-                'imagem' => 'violencia-mulher.jpg', // Substitua pelo nome real da imagem se houver
+                'imagem' => 'violencia-contra-mulher.jpg', // Substitua pelo nome real da imagem se houver
                 'textos' => [
                     "Texto 1:
 Nos 30 anos decorridos entre 1980 e 2010 foram assassinadas no país acima de 92 mil mulheres, 43,7 mil só na última década. O número de mortes nesse período passou de 1.353 para 4.465, que representa um aumento de 230%, mais que triplicando o quantitativo de mulheres vítimas de assassinato no país.                                        
@@ -201,7 +176,7 @@ STECK, J. Intolerância religiosa é crime de ódio e fere a dignidade. Jornal d
 
             'formacao-educacional-surdos' => [
                 'titulo' => 'Desafios para formação educacional de surdos no Brasil',
-                'imagem' => 'formacao-educacional-surdos.jpg', // Substitua pelo nome real da imagem, se houver
+                'imagem' => 'formacao-educacional-surdos-brasil.jpg', // Substitua pelo nome real da imagem, se houver
                 'textos' => [
                     "Texto 1:
 CAPÍTULO IV
@@ -224,7 +199,7 @@ Disponível em: www.brasil.gov.br. Acesso em: 9 jun. 2017 (adaptado).
 
             'trabalho-e-dignidade' => [
                 'titulo' => 'O Trabalho na Construção da Dignidade Humana',
-                'imagem' => 'trabalho-e-dignidade.jpg', // Substitua pelo nome correto da imagem, se houver
+                'imagem' => 'trabalho-construcao-dignidade-humana.jpeg', // Substitua pelo nome correto da imagem, se houver
                 'textos' => [
                     "Texto 1: 
 O que é trabalho escravo
@@ -244,6 +219,33 @@ Disponível em: http://revistagalileu.globo.com. Acesso em: 02 set. 2010 (fragme
                 'charges' => []
             ],
 
+            'publicidade-infantil' => [
+                'titulo' => 'Publicidade infantil em questão no Brasil',
+                'imagem' => 'pub-infantil-brasil.jpeg'
+, 
+                'textos' => [
+                    "Texto 1:
+
+POR QUE AS CRIANÇAS FICAM OBCECADAS COM VÍDEOS DE UNBOXING?
+
+Sabrina Ongaratto
+Enquanto os adultos ainda tentam entender o que há de tão atraente em ver alguém abrindo um novo brinquedo, as crianças estão cada vez mais obcecadas. Esse tipo de vídeo, batizado como unboxing, é bastante popular entre os pequenos e os youtubers já sacaram isso. Tanto que alguns já são “especializados” e até são pagos para abrir produtos de fabricantes.
+[...] Para a pedagoga e especialista em rotina infantil, Camila Lavagnoli (ES), os unboxing envolvem o principal interesse da criança, que é o brincar. [...] “O problema reside na criança se envolver diariamente com este tipo de conteúdo de forma despropositada, pois se torna uma forma de estímulo ao consumo: crianças amam novidades e provavelmente se o seu pequeno assiste a esse tipo de vídeo constantemente, você já deve ter recebido alguns pedidos para a compra de itens que ele conheceu ali”, alertou Camila. Mas, segundo a pedagoga, as consequências vão além do consumismo. “A criança pode tornar-se ansiosa e inquieta, com uma sensação de incompletude”, disse ela. Isto é, aquela ideia de que ela não tem tudo o que quer.
+
+Revista Crescer, Comportamento, Rio de Janeiro, 21 dez. 2018. Acesso em: 11 jul. 2020. Acesso em: 11 jul. 2020. Disponível em: https://revistacrescer.globo.com/Criancas/comportamento/noticia/2018/12/por-que- -criancas-ficam-obcecadas-com-videos-de-unboxing.html.
+",
+
+                    "Texto 2:
+
+A aprovação, em abril de 2014, de uma resolução que considera abusiva a publicidade infantil, emitida pelo Conselho Nacional de Direitos da Criança e do Adolescente (Conanda), deu início a um verdadeiro cabo de guerra envolvendo ONGs de defesa dos direitos das crianças e setores interessados na continuidade das propagandas dirigidas a esse público.
+Elogiada por pais, ativistas e entidades, a resolução estabelece como abusiva toda propaganda dirigida à criança que tem “a intenção de persuadi-la para o consumo de qualquer produto ou serviço” e que utilize aspectos como desenhos animados, bonecos, linguagem infantil, trilhas sonoras com temas infantis, oferta de prêmios, brindes ou artigos colecionáveis que tenham apelo às crianças.
+Ainda há dúvidas, porém, sobre como será a aplicação prática da resolução. E associações de anunciantes, emissoras, revistas e de empresas de licenciamento e fabricantes de produtos infantis criticam a medida e dizem não reconhecer a legitimidade constitucional do Conanda para legislar sobre publicidade e para impor a resolução tanto às famílias quanto ao mercado publicitário. Além disso, defendem que a auto-regulamentação pelo Conselho Nacional de Auto-regulamentação Publicitária (Conar) já seria uma forma de controlar e evitar abusos.
+
+IDOETA, P. A.; BARBA, M. D. A publicidade infantil deve ser proibida? Acesso em: 23 maio 2014 (adaptado). Disponível em: www.bbc.co.uk.
+"
+                ],
+                'charges' => []
+            ],
 
         ];
     }
