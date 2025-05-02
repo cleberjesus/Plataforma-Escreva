@@ -4,20 +4,15 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Http;
 
 class RegisterUserRequest extends FormRequest
 {
-    /**
-     * Autoriza o request (mantém true).
-     */
     public function authorize(): bool
     {
         return true;
     }
 
-    /**
-     * Regras de validação do formulário de registro.
-     */
     public function rules(): array
     {
         return [
@@ -27,21 +22,33 @@ class RegisterUserRequest extends FormRequest
                 'required',
                 'confirmed',
                 Password::min(8)
-                    ->mixedCase()     // Letra maiúscula e minúscula
-                    ->letters()       // Pelo menos uma letra
-                    ->numbers()       // Pelo menos um número
-                    ->symbols()       // Pelo menos um caractere especial
-                    ->uncompromised() // Evita senhas vazadas
+                    ->mixedCase()
+                    ->letters()
+                    ->numbers()
+                    ->symbols()
+                    ->uncompromised()
             ],
+            'g-recaptcha-response' => ['required', function ($attribute, $value, $fail) {
+                $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+                    'secret' => config('services.recaptcha.secret'),
+                    'response' => $value,
+                    'remoteip' => request()->ip(),
+                ]);
+
+                // Log da resposta do reCAPTCHA para debug
+                \Log::info('reCAPTCHA response', $response->json());
+
+                if (!optional($response->json())['success']) {
+                    $fail('A validação do reCAPTCHA falhou. Tente novamente.');
+                }
+            }],
         ];
     }
 
-    /**
-     * Mensagens de erro personalizadas (opcional).
-     */
     public function messages(): array
     {
         return [
+            'g-recaptcha-response.required' => '• Por favor, confirme que você não é um robô.',
             'password.min' => '• A senha deve ter no mínimo 8 caracteres.',
             'password.mixed_case' => '• A senha deve conter letras maiúsculas e minúsculas.',
             'password.letters' => '• A senha deve conter pelo menos uma letra.',
