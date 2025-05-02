@@ -38,6 +38,12 @@ return [
     'base_uri' => 'https://newsapi.org/v2',
     'key'      => env('NEWSAPI_KEY'),
 ],
+   'recaptcha' => [
+    'site' => env('RECAPTCHA_SITE'),
+    'secret' => env('RECAPTCHA_SECRET'),
+],
+
+
 
 
 ];
