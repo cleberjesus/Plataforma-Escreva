@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto p-6">
-    <h1 class="text-2xl font-bold text-center mb-6 text-black">Simulado Comum</h1>
+<div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6 text-black">Simulado Comum</h1>
 
     {{-- Cards dos temas --}}
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach ($temas as $slug => $tema)
-            <a href="{{ route('simulado.tema', ['tema' => $slug]) }}" class="block bg-white p-4 rounded-lg shadow hover:bg-gray-100 transition">
+            <a href="{{ route('simulado.tema', ['tema' => $slug]) }}" 
+               class="block bg-white p-4 rounded-lg shadow hover:bg-gray-100 transition duration-200">
                 <img src="{{ asset('images/temas/' . $tema['imagem']) }}"
                      onerror="this.onerror=null; this.src='{{ asset('images/temas/default.jpg') }}';"
                      alt="Imagem do tema {{ $tema['titulo'] }}"
@@ -17,15 +18,14 @@
             </a>
         @endforeach
     </div>
-</div>
 
     {{-- Texto motivador e botão de início --}}
-    <div id="textoMotivador" class="mt-8 p-6 bg-white rounded shadow hidden">
+    <div id="textoMotivador" class="mt-8 p-6 bg-white rounded shadow hidden max-w-2xl mx-auto">
         <p class="font-semibold text-gray-700 text-lg">Texto Motivador:</p>
         <p id="motivadorContent" class="mt-2 text-gray-600"></p>
 
         <button id="iniciarSimulado" 
-            class="mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded"
+            class="mt-6 w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded transition duration-200"
             onclick="iniciarSimulado()">
             Iniciar Simulado
         </button>
@@ -34,8 +34,18 @@
     {{-- Temporizador e botões de controle --}}
     <div id="timerContainer" class="mt-6 hidden text-center">
         <p class="text-lg font-semibold">Tempo: <span id="timer">00:00</span></p>
-        <button id="pausarTimer" class="mt-2 px-4 py-2 bg-yellow-500 text-white rounded hidden" onclick="pausarTimer()">Pausar</button>
-        <button id="finalizarSimulado" class="mt-2 px-4 py-2 bg-red-500 text-white rounded hidden" onclick="finalizarSimulado()">Finalizar</button>
+        <div class="mt-4 flex flex-col sm:flex-row justify-center gap-4">
+            <button id="pausarTimer" 
+                    class="px-4 py-2 bg-yellow-500 hover:bg-yellow-600 text-white rounded hidden transition duration-200" 
+                    onclick="pausarTimer()">
+                Pausar
+            </button>
+            <button id="finalizarSimulado" 
+                    class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded hidden transition duration-200" 
+                    onclick="finalizarSimulado()">
+                Finalizar
+            </button>
+        </div>
     </div>
 </div>
 
@@ -59,24 +69,23 @@
     }
 
     function iniciarSimulado() {
-    if (timerAtivo) return; // evita iniciar múltiplas vezes
+        if (timerAtivo) return;
 
-    tempo = 0;
-    timerAtivo = true;
-    document.getElementById("timerContainer").classList.remove("hidden");
-    document.getElementById("pausarTimer").classList.remove("hidden");
-    document.getElementById("finalizarSimulado").classList.remove("hidden");
+        tempo = 0;
+        timerAtivo = true;
+        document.getElementById("timerContainer").classList.remove("hidden");
+        document.getElementById("pausarTimer").classList.remove("hidden");
+        document.getElementById("finalizarSimulado").classList.remove("hidden");
 
-    timerInterval = setInterval(() => {
-        if (timerAtivo) {
-            tempo++;
-            let minutos = String(Math.floor(tempo / 60)).padStart(2, '0');
-            let segundos = String(tempo % 60).padStart(2, '0');
-            document.getElementById("timer").textContent = `${minutos}:${segundos}`;
-        }
-    }, 1000);
-}
-
+        timerInterval = setInterval(() => {
+            if (timerAtivo) {
+                tempo++;
+                let minutos = String(Math.floor(tempo / 60)).padStart(2, '0');
+                let segundos = String(tempo % 60).padStart(2, '0');
+                document.getElementById("timer").textContent = `${minutos}:${segundos}`;
+            }
+        }, 1000);
+    }
 
     function pausarTimer() {
         timerAtivo = !timerAtivo;
