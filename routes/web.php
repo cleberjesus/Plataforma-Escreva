@@ -54,7 +54,9 @@ Route::prefix('simulado-coringa')->group(function () {
 
 // Simulado Comum
 Route::get('/simulado-comum', [SimuladoComumController::class, 'index'])->name('simulado-comum');
-Route::get('/simulado/{tema}', [SimuladoComumController::class, 'mostrarTema'])->name('simulado.tema');
+
+// Página de um tema específico
+Route::get('/simulado/{slug}', [SimuladoComumController::class, 'mostrarTema'])->name('simulado.tema');
 
 // Redações
 Route::prefix('redacoes')->group(function () {
