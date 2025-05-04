@@ -4,11 +4,15 @@
 <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-6">
     <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6 text-black">Simulado Comum</h1>
 
+    <p class="text-center text-gray-700 mb-6 max-w-2xl mx-auto">
+    Escolha um dos temas abaixo para praticar sua redação com base em propostas reais. 
+    Leia o texto motivador, escreva sua dissertação e acompanhe o tempo como se estivesse em uma prova oficial.
+</p>
     {{-- Cards dos temas --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         @foreach ($temas as $slug => $tema)
-            <a href="{{ route('simulado.tema', ['tema' => $slug]) }}" 
-               class="block bg-white p-4 rounded-lg shadow hover:bg-gray-100 transition duration-200">
+        <a href="{{ route('simulado.tema', ['slug' => $slug]) }}"
+        class="block bg-white p-4 rounded-lg shadow hover:bg-gray-100 transition duration-200">
                 <img src="{{ asset('images/temas/' . $tema['imagem']) }}"
                      onerror="this.onerror=null; this.src='{{ asset('images/temas/default.jpg') }}';"
                      alt="Imagem do tema {{ $tema['titulo'] }}"
