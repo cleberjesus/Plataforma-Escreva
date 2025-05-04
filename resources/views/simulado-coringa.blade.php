@@ -97,7 +97,7 @@
 </div>
 
 <!-- ÁUDIO DA CONTAGEM -->
-<audio id="audioContagem" src="{{ asset('sounds/countdowngame.mp3') }}"></audio>
+<audio id="audioContagem" src="{{ asset('sounds/countdowngame.mp3') }}" preload="auto"></audio>
 
 <script>
     let tempoTotal = 3600;
@@ -108,6 +108,7 @@
     const timerText = document.getElementById('timerText');
     const progressCircle = document.getElementById('progress');
     const motivacionalTexto = document.getElementById('motivacionalTexto');
+    const audio = document.getElementById('audioContagem');
 
     const frasesMotivacionais = [
         "Continue assim! Você está indo muito bem!",
@@ -116,6 +117,9 @@
         "A constância vai te levar à nota 1000!",
         "Respira fundo, você tá no caminho certo!",
     ];
+
+    // Força o carregamento do áudio
+    audio.load();
 
     function atualizarTimer() {
         let minutos = Math.floor(tempoRestante / 60).toString().padStart(2, '0');
@@ -174,16 +178,21 @@
     });
 
     document.getElementById('btnInicioContagem').addEventListener('click', function () {
-        document.getElementById('inicioCard').classList.add('hidden');
-        const contagem = document.getElementById('contagemRegressiva');
-        let contador = 5;
-        const audio = document.getElementById('audioContagem');
+    document.getElementById('inicioCard').classList.add('hidden');
+    const contagem = document.getElementById('contagemRegressiva');
+    let contador = 5;
 
-        contagem.classList.remove('hidden');
-        contagem.textContent = contador;
+    contagem.classList.remove('hidden');
+    contagem.textContent = contador;
 
+    // Aguarda o áudio estar completamente pronto
+    audio.addEventListener('canplaythrough', function iniciarContagem() {
+        // Remove o listener para evitar múltiplas chamadas
+        audio.removeEventListener('canplaythrough', iniciarContagem);
+
+        // Toca a primeira vez
         audio.currentTime = 0;
-        audio.play();
+        audio.play().catch(e => console.warn("Erro ao reproduzir áudio:", e));
 
         const intervaloContagem = setInterval(() => {
             contador--;
@@ -196,10 +205,14 @@
             } else {
                 contagem.textContent = contador;
                 audio.currentTime = 0;
-                audio.play();
+                audio.play().catch(e => console.warn("Erro ao reproduzir áudio:", e));
             }
         }, 1000);
     });
+
+    // Garante que o navegador tente carregar o áudio
+    audio.load();
+});
 
     function gerarTema() {
         fetch("{{ route('simulado-coringa.gerarTema') }}")
