@@ -186,23 +186,85 @@
     </div>
 </section>
 
-<section class="plans">
-    <div class="plan-card">
-        <h3>Plano Grátis</h3>
-        <ul>
-            <li>Simulado Coringa</li>
-            <li>Correções Comum</li>
-            <li>Minhas Redações</li>
-        </ul>
-    </div>
-    
-    <div class="plan-card">
-        <h3>Plano Premium</h3>
-        <p><strong>R$ 9,90</strong> / mês</p>
-        <ul>
-            <li>Acesso ilimitado a correções ilimitadas com IA</li>
-        </ul>
-    </div>
+<<section class="pricing-section">
+  <div class="plan-card basic">
+    <h3>BASIC</h3>
+    <p class="price">R$2,99 <span>/ mês</span></p>
+    <ul>
+      <li> Simulado Coringa</li>
+      <li> Correções Comum</li>
+      <li> Minhas Redações</li>
+      <li> Espaço de descrição</li>
+      <li> Outros recursos</li>
+    </ul>
+    <button>Selecionar</button>
+  </div>
+  <div class="plan-card premium">
+    <h3>PREMIUM</h3>
+    <p class="price">R$9,99 <span>/ mês</span></p>
+    <ul>
+      <li> Simulado Coringa</li>
+      <li> Correções Comum</li>
+      <li> Minhas Redações</li>
+      <li>Espaço de descrição</li>
+      <li> Acesso ilimitado a IA</li>
+    </ul>
+    <button>Selecionar</button>
+  </div>
+</section>
+
+<style>
+.pricing-section {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  padding: 40px 20px;
+  background: #f8f9fa;
+}
+.plan-card {
+  background: white;
+  border-radius: 10px;
+  width: 250px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: center;
+  padding: 20px;
+}
+.plan-card h3 {
+  margin: 0;
+  font-size: 1.5em;
+}
+.plan-card .price {
+  font-size: 2em;
+  margin: 10px 0;
+}
+.plan-card .price span {
+  font-size: 0.8em;
+  color: #555;
+}
+.plan-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  text-align: left;
+}
+.plan-card ul li {
+  margin: 8px 0;
+}
+.plan-card button {
+  background: #0d1b2a;
+  color: white;
+  border: none;
+  padding: 10px;
+  width: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.basic { border-top: 6px solid #00bfa6; }
+.standard { border-top: 6px solid #ff5722; }
+.premium { border-top: 6px solid #e91e63; }
+</style>
+
+
     
    
 </section>
