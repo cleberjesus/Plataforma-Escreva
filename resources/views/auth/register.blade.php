@@ -12,7 +12,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
             font-family: 'Roboto', sans-serif;
-            background-color:rgb(209, 222, 255);
+            background-color: #fff;
             color: #333;
         }
         .wrapper {
@@ -105,6 +105,12 @@
             font-size: 0.875rem;
         }
         .mt-1 { margin-top: 0.25rem; }
+
+        /* Ajuste para o reCAPTCHA */
+        .g-recaptcha {
+            width: 100% !important;
+            margin-bottom: 20px;
+        }
 
         @media (max-width: 992px) {
             .inner {

@@ -58,7 +58,7 @@ Disponível em: https://repositorio.ipea.gov.br/handle/11058/7412 (adaptado).
                 ]
             ],
             'viver-em-rede' => [
-                'titulo' => 'Viver em rede no século XXI: os limites entre o público e o privado',
+                'titulo' => 'Viver em rede no século XXI: limites entre o público e privado',
                 'imagem' => 'viver-em-rede-seculo-xxi.jpeg',
                 'textos' => [
                     "Texto 1:
