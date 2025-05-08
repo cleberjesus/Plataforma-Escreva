@@ -6,7 +6,6 @@
 
     <!-- Card de Boas-Vindas e Início -->
     <div id="inicioCard" class="hidden flex flex-col md:flex-row items-center justify-center gap-8 bg-white p-6 rounded-lg shadow-lg mb-6">
-        <!-- Mensagens motivacionais à esquerda -->
         <div class="text-left text-gray-700 max-w-sm">
             <ul class="list-disc pl-5 space-y-2 font-medium">
                 <li>Pegue papel e caneta</li>
@@ -17,8 +16,6 @@
                 <li>Aquela nota 1000 do ENEM é sua!</li>
             </ul>
         </div>
-
-        <!-- Botão centralizado à direita -->
         <div class="text-center">
             <p class="mb-4 font-semibold">Você está pronto para começar o simulado?</p>
             <button id="btnInicioContagem" class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition">Iniciar</button>
@@ -35,12 +32,23 @@
             <div class="text-center mb-5">
                 <div id="resultado" class="p-3 border rounded hidden">
                     <h3><strong>Tema:</strong> <span id="tema"></span></h3>
-                    <p><strong>Texto Motivador:</strong> <span id="textoMotivador"></span></p>
+                    <p class="mt-2"><strong>Texto Motivador:</strong></p>
+                    <p id="textoMotivador" class="text-justify text-gray-700 mt-1"></p>
+
+                    <!-- Imagem do Tema -->
+                    <div class="mt-4">
+                        <img id="imagemTema" src="" alt="Imagem do Tema" class="w-full rounded shadow hidden">
+                    </div>
+
+                    <!-- Charge -->
+                    <div class="mt-4">
+                        <img id="chargeTema" src="" alt="Charge do Tema" class="w-full rounded shadow hidden">
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Timer + textos motivacionais dinâmicos -->
+        <!-- Timer + textos motivacionais -->
         <div class="bg-white p-6 rounded-lg shadow-lg text-center flex flex-col items-center justify-center gap-4">
             <div class="circle-timer inline-block w-32 h-32 relative mb-4">
                 <svg id="timerSvg" viewBox="0 0 100 100" class="w-full h-full">
@@ -100,84 +108,77 @@
 <audio id="audioContagem" src="{{ asset('sounds/countdowngame.mp3') }}" preload="auto"></audio>
 
 <script>
-    let tempoTotal = 3600;
-    let tempoRestante = tempoTotal;
-    let intervalo;
-    let motivacaoIntervalo;
+let tempoTotal = 3600;
+let tempoRestante = tempoTotal;
+let intervalo, motivacaoIntervalo;
+const timerText = document.getElementById('timerText');
+const progressCircle = document.getElementById('progress');
+const motivacionalTexto = document.getElementById('motivacionalTexto');
+const audio = document.getElementById('audioContagem');
 
-    const timerText = document.getElementById('timerText');
-    const progressCircle = document.getElementById('progress');
-    const motivacionalTexto = document.getElementById('motivacionalTexto');
-    const audio = document.getElementById('audioContagem');
+const frasesMotivacionais = [
+    "Continue assim! Você está indo muito bem!",
+    "Mantenha o foco, falta pouco!",
+    "Você consegue, sua evolução tá vindo!",
+    "A constância vai te levar à nota 1000!",
+    "Respira fundo, você tá no caminho certo!",
+];
 
-    const frasesMotivacionais = [
-        "Continue assim! Você está indo muito bem!",
-        "Mantenha o foco, falta pouco!",
-        "Você consegue, sua evolução tá vindo!",
-        "A constância vai te levar à nota 1000!",
-        "Respira fundo, você tá no caminho certo!",
-    ];
+audio.load();
 
-    // Força o carregamento do áudio
-    audio.load();
+function atualizarTimer() {
+    let minutos = Math.floor(tempoRestante / 60).toString().padStart(2, '0');
+    let segundos = (tempoRestante % 60).toString().padStart(2, '0');
+    timerText.textContent = `${minutos}:${segundos}`;
+    let progresso = (tempoRestante / tempoTotal) * 264;
+    progressCircle.style.strokeDashoffset = progresso;
+}
 
-    function atualizarTimer() {
-        let minutos = Math.floor(tempoRestante / 60).toString().padStart(2, '0');
-        let segundos = (tempoRestante % 60).toString().padStart(2, '0');
-        timerText.textContent = `${minutos}:${segundos}`;
-        let progresso = (tempoRestante / tempoTotal) * 264;
-        progressCircle.style.strokeDashoffset = progresso;
-    }
+function exibirMotivacao() {
+    const frase = frasesMotivacionais[Math.floor(Math.random() * frasesMotivacionais.length)];
+    motivacionalTexto.textContent = frase;
+    motivacionalTexto.classList.remove('hidden');
+}
 
-    function exibirMotivacao() {
-        const frase = frasesMotivacionais[Math.floor(Math.random() * frasesMotivacionais.length)];
-        motivacionalTexto.textContent = frase;
-        motivacionalTexto.classList.remove('hidden');
-    }
+function iniciarTimer() {
+    atualizarTimer();
+    exibirMotivacao();
 
-    function iniciarTimer() {
-        atualizarTimer();
-        exibirMotivacao();
-
-        intervalo = setInterval(() => {
-            if (tempoRestante <= 0) {
-                clearInterval(intervalo);
-                clearInterval(motivacaoIntervalo);
-                toastr.error('Tempo esgotado!', 'Aviso');
-            } else {
-                tempoRestante--;
-                atualizarTimer();
-            }
-        }, 1000);
-
-        motivacaoIntervalo = setInterval(() => {
-            exibirMotivacao();
-        }, 240000); // 4 minutos
-    }
-
-    document.getElementById('nivelForm').addEventListener('submit', function(event) {
-        event.preventDefault();
-
-        const experiencia = document.getElementById('experiencia').value;
-        const frequencia = document.getElementById('frequencia').value;
-        const conhecimento = document.getElementById('conhecimento').value;
-
-        if (experiencia === 'avancado' && frequencia === 'avancado' && conhecimento === 'avancado') {
-            tempoTotal = 1200;
-        } else if (experiencia === 'intermediario' || frequencia === 'intermediario' || conhecimento === 'intermediario') {
-            tempoTotal = 2100;
+    intervalo = setInterval(() => {
+        if (tempoRestante <= 0) {
+            clearInterval(intervalo);
+            clearInterval(motivacaoIntervalo);
+            toastr.error('Tempo esgotado!', 'Aviso');
         } else {
-            tempoTotal = 3600;
+            tempoRestante--;
+            atualizarTimer();
         }
+    }, 1000);
 
-        tempoRestante = tempoTotal;
-        atualizarTimer();
+    motivacaoIntervalo = setInterval(exibirMotivacao, 240000);
+}
 
-        document.getElementById('nivelModal').style.display = 'none';
-        document.getElementById('inicioCard').classList.remove('hidden');
-    });
+document.getElementById('nivelForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const experiencia = document.getElementById('experiencia').value;
+    const frequencia = document.getElementById('frequencia').value;
+    const conhecimento = document.getElementById('conhecimento').value;
 
-    document.getElementById('btnInicioContagem').addEventListener('click', function () {
+    if (experiencia === 'avancado' && frequencia === 'avancado' && conhecimento === 'avancado') {
+        tempoTotal = 1200;
+    } else if (experiencia === 'intermediario' || frequencia === 'intermediario' || conhecimento === 'intermediario') {
+        tempoTotal = 2100;
+    } else {
+        tempoTotal = 3600;
+    }
+
+    tempoRestante = tempoTotal;
+    atualizarTimer();
+    document.getElementById('nivelModal').style.display = 'none';
+    document.getElementById('inicioCard').classList.remove('hidden');
+});
+
+document.getElementById('btnInicioContagem').addEventListener('click', function () {
     document.getElementById('inicioCard').classList.add('hidden');
     const contagem = document.getElementById('contagemRegressiva');
     let contador = 5;
@@ -185,14 +186,10 @@
     contagem.classList.remove('hidden');
     contagem.textContent = contador;
 
-    // Aguarda o áudio estar completamente pronto
     audio.addEventListener('canplaythrough', function iniciarContagem() {
-        // Remove o listener para evitar múltiplas chamadas
         audio.removeEventListener('canplaythrough', iniciarContagem);
-
-        // Toca a primeira vez
         audio.currentTime = 0;
-        audio.play().catch(e => console.warn("Erro ao reproduzir áudio:", e));
+        audio.play().catch(() => {});
 
         const intervaloContagem = setInterval(() => {
             contador--;
@@ -205,34 +202,44 @@
             } else {
                 contagem.textContent = contador;
                 audio.currentTime = 0;
-                audio.play().catch(e => console.warn("Erro ao reproduzir áudio:", e));
+                audio.play().catch(() => {});
             }
         }, 1000);
     });
 
-    // Garante que o navegador tente carregar o áudio
     audio.load();
 });
 
-    function gerarTema() {
-        fetch("{{ route('simulado-coringa.gerarTema') }}")
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('tema').textContent = data.tema;
-                document.getElementById('textoMotivador').textContent = data.textoMotivador;
-                document.getElementById('resultado').classList.remove('hidden');
-            })
-            .catch(() => toastr.error("Erro ao gerar o tema. Tente novamente.", "Erro"));
-    }
+function gerarTema() {
+    fetch("{{ route('simulado-coringa.gerarTema') }}")
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('tema').textContent = data.tema;
+            document.getElementById('textoMotivador').textContent = data.textoMotivador;
+            document.getElementById('resultado').classList.remove('hidden');
 
-    document.getElementById('closeModal').addEventListener('click', function () {
+            if (data.imagem) {
+                const imagem = document.getElementById('imagemTema');
+                imagem.src = '/images/' + data.imagem;
+                imagem.classList.remove('hidden');
+            }
+
+            if (data.charges && data.charges.length > 0) {
+                const charge = document.getElementById('chargeTema');
+                charge.src = '/images/' + data.charges[0];
+                charge.classList.remove('hidden');
+            }
+        })
+        .catch(() => toastr.error("Erro ao gerar o tema. Tente novamente.", "Erro"));
+}
+
+document.getElementById('closeModal').addEventListener('click', () => {
+    document.getElementById('nivelModal').style.display = 'none';
+});
+document.getElementById('nivelModal').addEventListener('click', (event) => {
+    if (event.target === document.getElementById('nivelModal')) {
         document.getElementById('nivelModal').style.display = 'none';
-    });
-
-    document.getElementById('nivelModal').addEventListener('click', function (event) {
-        if (event.target === this) {
-            document.getElementById('nivelModal').style.display = 'none';
-        }
-    });
+    }
+});
 </script>
 @endsection
