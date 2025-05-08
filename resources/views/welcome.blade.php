@@ -10,6 +10,7 @@
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      scroll-behavior: smooth;
     }
     body {
       font-family: 'Inter', sans-serif;
@@ -17,19 +18,30 @@
       color: #1e293b;
       line-height: 1.6;
     }
-    header, footer {
+    header {
       background-color: #ffffff;
       padding: 20px 60px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       border-bottom: 1px solid #e2e8f0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      flex-wrap: wrap;
     }
     nav a {
       margin: 0 10px;
       text-decoration: none;
       color: #1e293b;
       font-weight: 500;
+      position: relative;
+    }
+    nav a.active {
+      color: #2563eb;
+      font-weight: 700;
     }
     .btn {
       background-color: #2563eb;
@@ -43,34 +55,45 @@
     .btn:hover {
       background-color: #1d4ed8;
     }
+
+    section {
+      scroll-margin-top: 100px;
+    }
+
     .hero {
       display: flex;
-      padding: 60px;
+      padding: 100px 60px;
       background-color: white;
       align-items: center;
       justify-content: space-between;
       gap: 40px;
       flex-wrap: wrap;
+      min-height: 90vh;
     }
+
     .hero-text {
       flex: 1;
       max-width: 600px;
     }
+
     .hero-text h1 {
       font-size: 2.75rem;
       margin-bottom: 1rem;
       color: #0f172a;
     }
+
     .hero-text p {
       margin-bottom: 1.5rem;
       font-size: 1.1rem;
     }
+
     .hero-img {
       flex: 1;
       max-width: 500px;
       width: 100%;
       height: auto;
     }
+
     .features {
       display: flex;
       padding: 60px;
@@ -78,49 +101,60 @@
       background-color: #f1f5f9;
       flex-wrap: wrap;
     }
+
     .features > div {
       flex: 1;
       margin: 20px;
       min-width: 280px;
     }
-    .plans {
+
+    .pricing-section {
       display: flex;
-      flex-direction: column;
-      align-items: center;
       padding: 80px 60px;
       background-color: #ffffff;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 30px;
     }
+
     .plan-card {
       background-color: white;
       padding: 40px;
       border-radius: 12px;
-      margin: 20px 0;
       width: 100%;
       max-width: 400px;
       text-align: center;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      flex: 1;
+      min-width: 280px;
     }
+
     .plan-card h3 {
       margin: 0;
       font-size: 1.5em;
     }
+
     .plan-card .price {
       font-size: 2em;
       margin: 10px 0;
     }
+
     .plan-card .price span {
       font-size: 0.8em;
       color: #555;
     }
+
     .plan-card ul {
       list-style: none;
       padding: 0;
       margin: 20px 0;
       text-align: left;
     }
+
     .plan-card ul li {
       margin: 8px 0;
     }
+
     .plan-card button {
       background: #0d1b2a;
       color: white;
@@ -130,6 +164,7 @@
       border-radius: 5px;
       cursor: pointer;
     }
+
     .basic { border-top: 6px solid #00bfa6; }
     .standard { border-top: 6px solid #ff5722; }
     .premium { border-top: 6px solid #e91e63; }
@@ -149,6 +184,7 @@
       text-align: center;
       padding: 60px 20px;
     }
+
     .footer-links {
       display: flex;
       justify-content: center;
@@ -156,55 +192,74 @@
       gap: 40px;
       margin-top: 30px;
     }
+
     .footer-links div {
       min-width: 150px;
     }
+
     .footer-links strong {
       display: block;
       margin-bottom: 10px;
       font-size: 1.1rem;
     }
 
-    .pricing-section {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-      padding: 40px 20px;
-      background: #f8f9fa;
-      flex-wrap: wrap;
-    }
-
-    @media (max-width: 1024px) {
+    @media (max-width: 768px) {
       .hero {
         flex-direction: column;
         text-align: center;
+        padding-top: 120px;
+        padding-left: 20px;
+        padding-right: 20px;
       }
-      .hero-text, .hero-img {
+      
+      .hero-text {
         max-width: 100%;
       }
+      
       .features {
         flex-direction: column;
-        padding: 30px;
+        padding: 30px 20px;
       }
+      
       .pricing-section {
+        padding: 40px 20px;
         flex-direction: column;
         align-items: center;
       }
+      
       header, footer {
         flex-direction: column;
         text-align: center;
         padding: 20px;
       }
+      
       nav {
         margin-top: 15px;
       }
+      
       nav a {
         display: inline-block;
         margin: 5px 10px;
       }
+      
       .footer-links {
         flex-direction: column;
         gap: 20px;
+      }
+      
+      .plan-card {
+        width: 100%;
+        max-width: 350px;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .pricing-section {
+        padding: 60px 30px;
+      }
+      
+      .plan-card {
+        min-width: 250px;
       }
     }
   </style>
@@ -214,11 +269,9 @@
 <header>
   <div><strong>Escreva</strong></div>
   <nav>
-    <a href="#">Início</a>
-    <a href="#">Como Funciona</a>
-    <a href="#">Planos</a>
-
-    <!-- Lógica de autenticação Laravel -->
+    <a href="#inicio">Início</a>
+    <a href="#como-funciona">Como Funciona</a>
+    <a href="#planos">Planos</a>
     @if (Route::has('login'))
       @auth
         <a href="{{ url('/dashboard') }}" class="btn">Dashboard</a>
@@ -232,16 +285,16 @@
   </nav>
 </header>
 
-<section class="hero">
+<section class="hero" id="inicio">
   <div class="hero-text">
     <h1>Sua Redação Nota 1000 Começa Aqui</h1>
     <p>Corrigida por IA. Com sugestões, temas e exemplos de excelência.</p>
-    <a href="#" class="btn">Começar Agora</a>
+    <a href="#planos" class="btn">Começar Agora</a>
   </div>
   <img src="/images/home-illustration.png" alt="Ilustração IA corrigindo redação" class="hero-img">
 </section>
 
-<section class="features">
+<section class="features" id="como-funciona">
   <div>
     <h2>Como Funciona</h2>
     <p>📌 Escolha um tema</p>
@@ -261,7 +314,7 @@
   </div>
 </section>
 
-<section class="pricing-section">
+<section class="pricing-section" id="planos">
   <div class="plan-card basic">
     <h3>BASIC</h3>
     <p class="price">R$2,99 <span>/ mês</span></p>
@@ -310,6 +363,31 @@
     </div>
   </div>
 </footer>
+
+<script>
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll("nav a[href^='#']");
+
+  function activateLink() {
+    let scrollY = window.pageYOffset;
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop - 120;
+      const sectionHeight = section.offsetHeight;
+      const id = section.getAttribute("id");
+
+      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${id}`) {
+            link.classList.add("active");
+          }
+        });
+      }
+    });
+  }
+
+  window.addEventListener("scroll", activateLink);
+</script>
 
 </body>
 </html>
