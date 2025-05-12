@@ -2,12 +2,12 @@
 
 @section('content')
 <div class="container mx-auto p-6">
-    <h1 class="text-2xl font-bold text-center mb-4 text-white">Simulado Coringa</h1>
+    <h1 class="text-3xl font-extrabold text-center mb-6 text-black drop-shadow">Simulado Coringa</h1>
 
     <!-- Card de Boas-Vindas e Início -->
-    <div id="inicioCard" class="hidden flex flex-col md:flex-row items-center justify-center gap-8 bg-white p-6 rounded-lg shadow-lg mb-6">
-        <div class="text-left text-gray-700 max-w-sm">
-            <ul class="list-disc pl-5 space-y-2 font-medium">
+    <div id="inicioCard" class="hidden flex flex-col md:flex-row items-center justify-center gap-10 bg-white p-8 rounded-2xl shadow-xl mb-6">
+        <div class="text-left text-gray-800 max-w-sm">
+            <ul class="list-disc pl-5 space-y-2 font-medium text-lg">
                 <li>Pegue papel e caneta</li>
                 <li>Prepare um ambiente calmo</li>
                 <li>Respire fundo</li>
@@ -17,89 +17,89 @@
             </ul>
         </div>
         <div class="text-center">
-            <p class="mb-4 font-semibold">Você está pronto para começar o simulado?</p>
-            <button id="btnInicioContagem" class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700 transition">Iniciar</button>
+            <p class="mb-4 font-semibold text-lg text-gray-700">Você está pronto para começar o simulado?</p>
+            <button id="btnInicioContagem" class="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition duration-300 shadow-md">Iniciar</button>
         </div>
     </div>
 
     <!-- Contagem regressiva -->
-    <div id="contagemRegressiva" class="hidden text-5xl text-center text-white font-bold mb-6"></div>
+    <div id="contagemRegressiva" class="hidden text-6xl text-center text-blue font-extrabold mb-6 animate-pulse"></div>
 
     <!-- Conteúdo principal -->
-    <div class="grid grid-cols-2 gap-6 hidden" id="simuladoContainer">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 hidden" id="simuladoContainer">
         <!-- Área do tema e texto motivador -->
-        <div class="bg-white p-6 rounded-lg shadow-lg">
+        <div class="bg-white p-6 rounded-2xl shadow-xl">
             <div class="text-center mb-5">
-                <div id="resultado" class="p-3 border rounded hidden">
-                    <h3><strong>Tema:</strong> <span id="tema"></span></h3>
-                    <p class="mt-2"><strong>Texto Motivador:</strong></p>
-                    <p id="textoMotivador" class="text-justify text-gray-700 mt-1"></p>
+                <div id="resultado" class="p-4 border border-gray-200 rounded-lg hidden bg-gray-50">
+                    <h3 class="text-lg font-bold mb-2"><strong>Tema:</strong> <span id="tema" class="text-blue-700"></span></h3>
+                    <p class="text-base font-medium"><strong>Texto Motivador:</strong></p>
+                    <p id="textoMotivador" class="text-justify text-gray-700 mt-2"></p>
 
                     <!-- Imagem do Tema -->
                     <div class="mt-4">
-                        <img id="imagemTema" src="" alt="Imagem do Tema" class="w-full rounded shadow hidden">
+                        <img id="imagemTema" src="" alt="Imagem do Tema" class="w-full rounded-lg shadow hidden">
                     </div>
 
                     <!-- Charge -->
                     <div class="mt-4">
-                        <img id="chargeTema" src="" alt="Charge do Tema" class="w-full rounded shadow hidden">
+                        <img id="chargeTema" src="" alt="Charge do Tema" class="w-full rounded-lg shadow hidden">
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- Timer + textos motivacionais -->
-        <div class="bg-white p-6 rounded-lg shadow-lg text-center flex flex-col items-center justify-center gap-4">
-            <div class="circle-timer inline-block w-32 h-32 relative mb-4">
+        <div class="bg-white p-6 rounded-2xl shadow-xl text-center flex flex-col items-center justify-center gap-6">
+            <div class="circle-timer inline-block w-36 h-36 relative mb-2">
                 <svg id="timerSvg" viewBox="0 0 100 100" class="w-full h-full">
                     <circle cx="50" cy="50" r="42" stroke="#e9ecef" stroke-width="10" fill="none"></circle>
-                    <circle id="progress" cx="50" cy="50" r="42" stroke="#28a745" stroke-width="10" fill="none"
+                    <circle id="progress" cx="50" cy="50" r="42" stroke="#3b82f6" stroke-width="10" fill="none"
                         stroke-dasharray="264" stroke-dashoffset="264" stroke-linecap="round"></circle>
                 </svg>
-                <div class="timer-text absolute inset-0 flex items-center justify-center text-xl font-bold text-gray-800" id="timerText">00:00</div>
+                <div class="timer-text absolute inset-0 flex items-center justify-center text-2xl font-bold text-gray-800" id="timerText">00:00</div>
             </div>
-            <div id="motivacionalTexto" class="text-gray-700 font-semibold text-center hidden"></div>
+            <div id="motivacionalTexto" class="text-blue-700 font-semibold text-center hidden text-lg"></div>
         </div>
     </div>
 </div>
 
 <!-- Modal Avaliação de Nível -->
-<div class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50" id="nivelModal">
-    <div class="bg-white p-6 rounded-lg shadow-lg w-96 relative">
-        <button id="closeModal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-700 focus:outline-none">
-            <i class="bi bi-x-circle" style="font-size: 1.5rem;"></i>
+<div class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-60 z-50" id="nivelModal">
+    <div class="bg-white p-6 rounded-2xl shadow-2xl w-full max-w-md relative">
+        <button id="closeModal" class="absolute top-2 right-2 text-gray-400 hover:text-gray-600 focus:outline-none">
+            <i class="bi bi-x-circle text-2xl"></i>
         </button>
 
-        <h5 class="text-lg font-semibold text-center mb-4">Avaliação de Nível</h5>
-        <form id="nivelForm">
-            <div class="mb-3">
-                <label for="experiencia" class="block font-medium">Qual sua experiência com redação?</label>
-                <select id="experiencia" class="w-full p-2 border rounded" required>
+        <h5 class="text-xl font-bold text-center mb-4 text-gray-800">Avaliação de Nível</h5>
+        <form id="nivelForm" class="space-y-4">
+            <div>
+                <label for="experiencia" class="block font-medium text-gray-700">Qual sua experiência com redação?</label>
+                <select id="experiencia" class="w-full p-2 border rounded focus:ring focus:border-blue-400" required>
                     <option value="">Selecione...</option>
                     <option value="iniciante">Nenhuma experiência</option>
                     <option value="intermediario">Já escrevi algumas redações</option>
                     <option value="avancado">Escrevo frequentemente</option>
                 </select>
             </div>
-            <div class="mb-3">
-                <label for="frequencia" class="block font-medium">Com que frequência você escreve redações?</label>
-                <select id="frequencia" class="w-full p-2 border rounded" required>
+            <div>
+                <label for="frequencia" class="block font-medium text-gray-700">Com que frequência você escreve redações?</label>
+                <select id="frequencia" class="w-full p-2 border rounded focus:ring focus:border-blue-400" required>
                     <option value="">Selecione...</option>
                     <option value="iniciante">Raramente</option>
                     <option value="intermediario">Uma vez por mês</option>
                     <option value="avancado">Toda semana</option>
                 </select>
             </div>
-            <div class="mb-3">
-                <label for="conhecimento" class="block font-medium">Como avalia seu conhecimento em técnicas de redação?</label>
-                <select id="conhecimento" class="w-full p-2 border rounded" required>
+            <div>
+                <label for="conhecimento" class="block font-medium text-gray-700">Como avalia seu conhecimento em técnicas de redação?</label>
+                <select id="conhecimento" class="w-full p-2 border rounded focus:ring focus:border-blue-400" required>
                     <option value="">Selecione...</option>
                     <option value="iniciante">Baixo</option>
                     <option value="intermediario">Médio</option>
                     <option value="avancado">Alto</option>
                 </select>
             </div>
-            <button type="submit" class="btn btn-primary w-full bg-blue-500 text-white py-2 px-4 rounded">Começar Simulado</button>
+            <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300 shadow">Começar Simulado</button>
         </form>
     </div>
 </div>
