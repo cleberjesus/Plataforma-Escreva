@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Esqueceu sua senha</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
         * {
             box-sizing: border-box;
@@ -18,67 +19,63 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 40px;
+            width: 100vw;
+            overflow: hidden; /* Remove barras de rolagem */
+            padding: 10px;
         }
 
         .container {
             display: flex;
-            max-width: 900px;
-            width: 100%;
-            gap: 40px;
+            flex-direction: column;
             align-items: center;
-        }
-
-        .illustration {
-            flex: 1;
+            justify-content: center;
+            width: 100%;
+            max-width: 500px;
+            padding: 20px;
+            text-align: center;
         }
 
         .illustration img {
             width: 100%;
-            max-width: 400px;
-        }
-
-        .form-section {
-            flex: 1;
+            max-width: 300px;
         }
 
         .form-section h2 {
-            font-size: 32px;
+            font-size: 28px;
             margin-bottom: 10px;
             font-weight: 700;
         }
 
         .form-section p {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 30px;
-        }
-
-        .form-section input[type="email"] {
-            width: 100%;
-            padding: 12px 16px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            margin-bottom: 20px;
             font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
         }
 
+        .form-section input[type="email"],
         .form-section button {
             width: 100%;
             padding: 12px;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .form-section input[type="email"] {
+            border: 1px solid #ccc;
+            margin-bottom: 15px;
+        }
+
+        .form-section button {
             background-color: #4a90e2;
             color: #fff;
-            font-size: 16px;
             border: none;
-            border-radius: 6px;
             cursor: pointer;
         }
 
         .form-section .back-link {
             display: block;
-            margin-top: 20px;
-            text-align: center;
-            font-size: 14px;
+            margin-top: 15px;
+            font-size: 16px;
             color: #aaa;
             text-decoration: none;
         }
@@ -90,19 +87,19 @@
         .alert-success {
             background-color: #e6f7ec;
             color: #276749;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
             border: 1px solid #c6f6d5;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
 
         .alert-error {
             background-color: #ffe6e6;
             color: #cc0000;
-            padding: 10px 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
             border: 1px solid #ffb3b3;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
         }
     </style>
 </head>
@@ -113,19 +110,18 @@
         </div>
 
         <div class="form-section">
-            <h2>Esqueceu<br>sua senha?</h2>
+            <h2>Esqueceu sua senha?</h2>
             <p>Informe seu e-mail e enviaremos um link para você redefinir sua senha.</p>
 
-            {{-- Mensagem de sucesso --}}
             @if (session('status'))
                 <div class="alert-success">
-                    {{ session('status') }}
+                    <strong>Sucesso:</strong> {{ session('status') }}
                 </div>
             @endif
 
-            {{-- Mensagens de erro --}}
             @if ($errors->any())
                 <div class="alert-error">
+                    <strong>Erro:</strong>
                     <ul style="list-style: none; padding-left: 0;">
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -144,4 +140,4 @@
         </div>
     </div>
 </body>
-</html>
+</html> 
