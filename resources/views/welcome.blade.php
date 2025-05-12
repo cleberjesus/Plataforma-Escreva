@@ -317,7 +317,7 @@
 <section class="pricing-section" id="planos">
   <div class="plan-card basic">
     <h3>BASIC</h3>
-    <p class="price">R$2,99 <span>/ mês</span></p>
+    <p class="price">Grátis<span></span></p>
     <ul>
       <li>Simulado Coringa</li>
       <li>Correções Comum</li>
@@ -325,12 +325,12 @@
       <li>Espaço de descrição</li>
       <li>Outros recursos</li>
     </ul>
-    <button>Selecionar</button>
+<button onclick="window.location.href='{{ route('register') }}'">Selecionar</button>
   </div>
 
   <div class="plan-card premium">
-    <h3>PREMIUM</h3>
-    <p class="price">R$9,99 <span>/ mês</span></p>
+    <h3>Escreva Plus</h3>
+    <p class="price">R$9,90 <span>/ mês</span></p>
     <ul>
       <li>Simulado Coringa</li>
       <li>Correções Comum</li>
@@ -338,31 +338,51 @@
       <li>Espaço de descrição</li>
       <li>Acesso ilimitado a IA</li>
     </ul>
-    <button>Selecionar</button>
+<button onclick="window.location.href='{{ route('register') }}'">Selecionar</button>
   </div>
 </section>
 
-<footer>
-  <strong>Escreva &copy; 2025</strong>
-  <div class="footer-links">
-    <div>
-      <strong>Sobre nós</strong>
-      <p>Sobre</p>
-      <p>Equipe</p>
+<<footer style="background: linear-gradient(to right, #1e293b, #0f172a); color: white; padding: 60px 20px;">
+  <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px;">
+    
+    <div style="flex: 1; min-width: 200px;">
+      <h3 style="margin-bottom: 10px; font-size: 1.25rem;">Escreva</h3>
+      <p style="opacity: 0.8;">Plataforma inteligente para simular, corrigir e evoluir suas redações. Rumo à nota 1000!</p>
     </div>
-    <div>
-      <strong>Contato</strong>
-      <p>Política de Privacidade</p>
-      <p>Termos de Uso</p>
+
+    <div style="flex: 1; min-width: 150px;">
+      <h4 style="margin-bottom: 10px;">Links</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="#inicio" style="color: #e2e8f0; text-decoration: none;">Início</a></li>
+        <li><a href="#como-funciona" style="color: #e2e8f0; text-decoration: none;">Como Funciona</a></li>
+        <li><a href="#planos" style="color: #e2e8f0; text-decoration: none;">Planos</a></li>
+      </ul>
     </div>
-    <div>
-      <strong>Redes Sociais</strong>
-      <p>🎥 YouTube</p>
-      <p>📸 Instagram</p>
-      <p>🎵 TikTok</p>
+
+    <div style="flex: 1; min-width: 150px;">
+      <h4 style="margin-bottom: 10px;">Institucional</h4>
+      <ul style="list-style: none; padding: 0;">
+        <li><a href="#" style="color: #e2e8f0; text-decoration: none;">Política de Privacidade</a></li>
+        <li><a href="#" style="color: #e2e8f0; text-decoration: none;">Termos de Uso</a></li>
+      </ul>
     </div>
+
+    <div style="flex: 1; min-width: 150px;">
+      <h4 style="margin-bottom: 10px;">Siga-nos</h4>
+      <div style="display: flex; gap: 15px;">
+        <a href="#" title="YouTube"><img src="/icons/youtube.svg" alt="YouTube" style="width: 24px;"></a>
+        <a href="#" title="Instagram"><img src="/icons/instagram.svg" alt="Instagram" style="width: 24px;"></a>
+        <a href="#" title="TikTok"><img src="/icons/tiktok.svg" alt="TikTok" style="width: 24px;"></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="text-align: center; margin-top: 40px; font-size: 0.9rem; opacity: 0.7;">
+    &copy; 2025 Escreva. Todos os direitos reservados.
   </div>
 </footer>
+
 
 <script>
   const sections = document.querySelectorAll("section");
