@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ff360c63f3cdf1c05868dae383e14bb0",
+    "content-hash": "38a970c076060a47b42e13c2f1acd60d",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -1120,16 +1120,16 @@
         },
         {
             "name": "laravel/cashier",
-            "version": "v15.6.3",
+            "version": "v15.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/cashier-stripe.git",
-                "reference": "138f8c47b6f7c4217c37ea0f7e9099d4f7777e5e"
+                "reference": "8fe60cc71161ef06b6a1b23cffe886abf2a49b29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/cashier-stripe/zipball/138f8c47b6f7c4217c37ea0f7e9099d4f7777e5e",
-                "reference": "138f8c47b6f7c4217c37ea0f7e9099d4f7777e5e",
+                "url": "https://api.github.com/repos/laravel/cashier-stripe/zipball/8fe60cc71161ef06b6a1b23cffe886abf2a49b29",
+                "reference": "8fe60cc71161ef06b6a1b23cffe886abf2a49b29",
                 "shasum": ""
             },
             "require": {
@@ -1204,7 +1204,7 @@
                 "issues": "https://github.com/laravel/cashier/issues",
                 "source": "https://github.com/laravel/cashier"
             },
-            "time": "2025-04-01T14:52:25+00:00"
+            "time": "2025-04-22T13:59:36+00:00"
         },
         {
             "name": "laravel/framework",
