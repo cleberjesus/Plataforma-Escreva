@@ -70,5 +70,11 @@ Route::prefix('redacoes')->group(function () {
 // Leituras
 Route::get('/leituras', [LeiaController::class, 'mostrarLeituras'])->name('leituras');
 
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/assinar', [AssinaturaController::class, 'assinar'])->name('assinar.premium');
+});
+Route::get('/assinatura/sucesso', [AssinaturaController::class, 'sucesso'])->name('assinatura.sucesso');
+
 // Auth scaffolding
 require __DIR__ . '/auth.php';
