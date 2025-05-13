@@ -126,3 +126,49 @@
         </div>
     </div>
 </nav>
+
+<style>
+    /* Estilo global para a fonte Montserrat */
+    * {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+    }
+
+    /* Estilo do dropdown */
+    .dropdown-content {
+        background: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e5e7eb;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+    }
+
+    .dropdown-link {
+        display: block;
+        padding: 0.75rem 1rem;
+        transition: all 0.2s;
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 500;
+    }
+
+    .dropdown-link:hover {
+        background-color: #f3f4f6;
+    }
+
+    /* Estilo do botão do usuário */
+    .user-button {
+        background: linear-gradient(to right, #3D44D9, #2D33B0);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        font-weight: 500;
+        transition: all 0.2s;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .user-button:hover {
+        background: linear-gradient(to right, #2D33B0, #1D22A0);
+        transform: translateY(-1px);
+    }
+</style>
