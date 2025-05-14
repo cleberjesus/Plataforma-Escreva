@@ -32,6 +32,11 @@
       z-index: 1000;
       flex-wrap: wrap;
     }
+    .logo {
+      height: 4rem;
+      width: auto;
+      max-width: 300px;
+    }
     nav a {
       margin: 0 10px;
       text-decoration: none;
@@ -251,6 +256,11 @@
         width: 100%;
         max-width: 350px;
       }
+
+      .logo {
+        height: 3rem;
+        max-width: 260px;
+      }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
@@ -267,7 +277,11 @@
 <body>
 
 <header>
-  <div><strong>Escreva</strong></div>
+  <div>
+    <a href="{{ route('dashboard') }}">
+      <img src="{{ asset('images/logo-secundaria.png') }}" alt="Logo" class="logo">
+    </a>
+  </div>
   <nav>
     <a href="#inicio">Início</a>
     <a href="#como-funciona">Como Funciona</a>
