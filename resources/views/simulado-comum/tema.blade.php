@@ -14,7 +14,7 @@
 
     <!-- Título -->
     <div class="text-center mb-6 px-2">
-        <h1 class="text-2xl sm:text-3xl font-bold text-blue-700 break-words">{{ $tema['titulo'] }}</h1>
+        <h1 class="text-2xl sm:text-3xl font-bold text-blue-700 break-words">{{ $tema->titulo }}</h1>
         <p class="text-sm sm:text-base text-gray-600">Proposta de redação para treino em casa</p>
     </div>
 
@@ -22,27 +22,41 @@
     <div class="bg-white p-4 sm:p-6 rounded-md shadow mb-6">
         <h2 class="text-base sm:text-lg font-semibold mb-2 text-blue-700">Descrição da Função</h2>
         <p class="text-sm sm:text-base text-gray-700">
-            Com base nos textos motivadores e nos seus próprios conhecimentos, redija um texto dissertativo-argumentativo sobre o tema <strong>{{ $tema['titulo'] }}</strong> em norma-padrão da língua portuguesa.
+            Com base nos textos motivadores e nos seus próprios conhecimentos, redija um texto dissertativo-argumentativo sobre o tema <strong>{{ $tema->titulo }}</strong> em norma-padrão da língua portuguesa.
         </p>
     </div>
 
     <!-- Imagem do tema -->
     <div class="mb-6">
-        <img src="{{ asset('images/temas/' . $tema['imagem']) }}"
+        <img src="{{ asset('images/temas/' . $tema->imagem) }}"
              onerror="this.onerror=null; this.src='{{ asset('images/temas/default.jpg') }}';"
-             alt="Imagem do tema {{ $tema['titulo'] }}"
+             alt="Imagem do tema {{ $tema->titulo }}"
              class="w-full h-auto max-h-[400px] object-contain rounded-md border shadow mx-auto">
     </div>
 
     <!-- Textos motivadores -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-        @foreach ($tema['textos'] as $index => $texto)
+        @foreach ($textosMotivadores as $index => $texto)
             <div class="bg-gray-100 p-4 rounded-md border-l-4 border-blue-600 shadow-sm">
                 <h3 class="font-semibold mb-2 text-blue-700">Texto Motivador {{ $index + 1 }}</h3>
-                <p class="text-sm text-gray-700 whitespace-pre-line break-words">{{ $texto }}</p>
+                <p class="text-sm text-gray-700 whitespace-pre-line break-words">{{ $texto->texto }}</p>
             </div>
         @endforeach
     </div>
+
+    <!-- Charges -->
+    @if(count($charges) > 0)
+        <div class="mb-6">
+            <h3 class="font-semibold mb-2 text-blue-700">Charges</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                @foreach($charges as $charge)
+                    <img src="{{ asset($charge) }}" 
+                         alt="Charge relacionada ao tema" 
+                         class="w-full h-auto rounded-md border shadow">
+                @endforeach
+            </div>
+        </div>
+    @endif
 
     <!-- Botão para iniciar -->
     <div class="text-center mb-6">
@@ -156,3 +170,4 @@
 
 </div>
 @endsection
+
