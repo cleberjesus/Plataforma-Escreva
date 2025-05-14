@@ -11,7 +11,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <img src="/images/logo.png" alt="Logo" class="h-14 w-auto max-w-[350px]">
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="h-14 w-auto max-w-[350px]">
                     </a>
                 </div>
 
