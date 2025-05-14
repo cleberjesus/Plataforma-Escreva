@@ -5,19 +5,20 @@
     <h1 class="text-2xl sm:text-3xl font-bold text-center mb-6 text-black">Simulado Comum</h1>
 
     <p class="text-center text-gray-700 mb-6 max-w-2xl mx-auto">
-    Escolha um dos temas abaixo para praticar sua redação com base em propostas reais. 
-    Leia o texto motivador, escreva sua dissertação e acompanhe o tempo como se estivesse em uma prova oficial.
-</p>
+        Escolha um dos temas abaixo para praticar sua redação com base em propostas reais. 
+        Leia o texto motivador, escreva sua dissertação e acompanhe o tempo como se estivesse em uma prova oficial.
+    </p>
+
     {{-- Cards dos temas --}}
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        @foreach ($temas as $slug => $tema)
-        <a href="{{ route('simulado.tema', ['slug' => $slug]) }}"
-        class="block bg-white p-4 rounded-lg shadow hover:bg-gray-100 transition duration-200">
-                <img src="{{ asset('images/temas/' . $tema['imagem']) }}"
+        @foreach ($temas as $tema)
+            <a href="{{ route('simulado.tema', ['slug' => $tema->slug]) }}"
+               class="block bg-white p-4 rounded-lg shadow hover:bg-gray-100 transition duration-200">
+                <img src="{{ asset('images/temas/' . $tema->imagem) }}"
                      onerror="this.onerror=null; this.src='{{ asset('images/temas/default.jpg') }}';"
-                     alt="Imagem do tema {{ $tema['titulo'] }}"
+                     alt="Imagem do tema {{ $tema->titulo }}"
                      class="w-full h-40 object-cover rounded-md mb-4">
-                <h2 class="text-lg font-semibold text-gray-800">{{ $tema['titulo'] }}</h2>
+                <h2 class="text-lg font-semibold text-gray-800">{{ $tema->titulo }}</h2>
                 <p class="text-sm text-gray-600 mt-2">Clique para iniciar o simulado com esse tema</p>
             </a>
         @endforeach
@@ -54,23 +55,9 @@
 </div>
 
 <script>
-    let textosMotivadores = @json(array_map(fn($t) => $t['textos'], $temas));
     let tempo = 0;
     let timerAtivo = false;
     let timerInterval;
-
-    function selecionarTema(slug) {
-        const motivadorDiv = document.getElementById("textoMotivador");
-        const motivadorContent = document.getElementById("motivadorContent");
-        const iniciarSimulado = document.getElementById("iniciarSimulado");
-
-        if (textosMotivadores[slug]) {
-            let textos = textosMotivadores[slug];
-            motivadorContent.textContent = textos[Math.floor(Math.random() * textos.length)];
-            motivadorDiv.classList.remove("hidden");
-            iniciarSimulado.dataset.temaSlug = slug;
-        }
-    }
 
     function iniciarSimulado() {
         if (timerAtivo) return;
