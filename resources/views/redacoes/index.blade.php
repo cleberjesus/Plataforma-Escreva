@@ -160,5 +160,61 @@
 <!-- Scripts -->
 <script>
     // Manter os scripts que já foram fornecidos anteriormente aqui
+    
+    // Alterna campos com base no modo de envio selecionado
+    document.getElementById('modo_envio').addEventListener('change', function () {
+        const modo = this.value;
+        document.getElementById('texto_redacao_div').style.display = modo === 'digitado' ? 'block' : 'none';
+        document.getElementById('imagem_redacao_div').style.display = modo === 'imagem' ? 'block' : 'none';
+    });
+
+    // Mostrar nome do arquivo selecionado
+    document.getElementById('imagem_redacao').addEventListener('change', function () {
+        const fileName = this.files[0]?.name || 'Selecionar Arquivo';
+        document.getElementById('imagem_redacao_label_text').innerText = fileName;
+        document.getElementById('imagem_redacao_filename').innerText = fileName;
+    });
+
+    // Modal de edição
+    function abrirModalEditar(id, tema, modo_envio, texto_redacao) {
+        document.getElementById('modal-editar').classList.remove('hidden');
+        document.getElementById('editar_redacao_id').value = id;
+        document.getElementById('editar_tema').value = tema;
+        document.getElementById('editar_modo_envio').value = modo_envio;
+        document.getElementById('editar_texto_redacao').value = texto_redacao;
+
+        toggleEditarFields(modo_envio);
+
+        document.getElementById('form-editar').action = `/redacoes/${id}`;
+    }
+
+    function toggleEditarFields(modo) {
+        document.getElementById('editar_texto_redacao_div').style.display = modo === 'digitado' ? 'block' : 'none';
+        document.getElementById('editar_imagem_redacao_div').style.display = modo === 'imagem' ? 'block' : 'none';
+    }
+
+    function fecharModal() {
+        document.getElementById('modal-editar').classList.add('hidden');
+    }
+
+    // Modal de exclusão
+    let redacaoIdParaExcluir = null;
+
+    function abrirModalApagar(id) {
+        redacaoIdParaExcluir = id;
+        document.getElementById('modal-apagar').classList.remove('hidden');
+    }
+
+    function fecharModalApagar() {
+        redacaoIdParaExcluir = null;
+        document.getElementById('modal-apagar').classList.add('hidden');
+    }
+
+    function confirmarExclusao() {
+        if (redacaoIdParaExcluir) {
+            document.getElementById(`form-apagar-${redacaoIdParaExcluir}`).submit();
+        }
+    }
+
 </script>
 @endsection
