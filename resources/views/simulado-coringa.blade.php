@@ -38,7 +38,7 @@
     <!-- Conteúdo principal -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 hidden" id="simuladoContainer">
         <!-- Área do tema e texto motivador -->
-        <div class="bg-white p-4 md:p-6 rounded-2xl shadow-xl">
+        <div class="bg-white p-4 md:p-6 rounded-2xl shadow-xl mx-auto max-w-2xl w-full flex flex-col items-center justify-center">
             <div class="text-center mb-5">
                 <div id="resultado" class="p-3 md:p-4 border border-gray-200 rounded-lg hidden bg-gray-50">
                     <h3 class="text-base md:text-lg font-bold mb-2"><strong>Tema:</strong> <span id="tema" class="text-blue-700"></span></h3>
@@ -68,17 +68,31 @@
             </div>
         </div>
 
-        <!-- Timer + textos motivacionais -->
-        <div class="bg-white p-4 md:p-6 rounded-2xl shadow-xl text-center flex flex-col items-center justify-center gap-6">
-            <div class="circle-timer inline-block w-24 h-24 md:w-36 md:h-36 relative mb-2">
-                <svg id="timerSvg" viewBox="0 0 100 100" class="w-full h-full">
+        <!-- Timer fixo no canto direito em telas md+ -->
+        <div class="hidden md:block">
+                 <div class="fixed top-24 right-8 z-40 flex flex-col items-center gap-4">
+        <div class="circle-timer inline-block w-28 h-28 relative mb-2 bg-white rounded-full shadow-xl">
+                    <svg id="timerSvg" viewBox="0 0 100 100" class="w-full h-full">
+                        <circle cx="50" cy="50" r="42" stroke="#e9ecef" stroke-width="10" fill="none"></circle>
+                        <circle id="progress" cx="50" cy="50" r="42" stroke="#3b82f6" stroke-width="10" fill="none"
+                            stroke-dasharray="264" stroke-dashoffset="264" stroke-linecap="round"></circle>
+                    </svg>
+                    <div class="timer-text absolute inset-0 flex items-center justify-center text-2xl font-bold text-gray-800" id="timerText">00:00</div>
+                </div>
+                <div id="motivacionalTexto" class="text-blue-700 font-semibold text-center hidden text-lg"></div>
+            </div>
+        </div>
+        <!-- Timer normal para mobile -->
+        <div class="flex flex-col items-center justify-center gap-6 w-full md:hidden">
+            <div class="circle-timer inline-block w-24 h-24 relative mb-2 bg-white rounded-full shadow-xl">
+                <svg id="timerSvgMobile" viewBox="0 0 100 100" class="w-full h-full">
                     <circle cx="50" cy="50" r="42" stroke="#e9ecef" stroke-width="10" fill="none"></circle>
-                    <circle id="progress" cx="50" cy="50" r="42" stroke="#3b82f6" stroke-width="10" fill="none"
+                    <circle id="progressMobile" cx="50" cy="50" r="42" stroke="#3b82f6" stroke-width="10" fill="none"
                         stroke-dasharray="264" stroke-dashoffset="264" stroke-linecap="round"></circle>
                 </svg>
-                <div class="timer-text absolute inset-0 flex items-center justify-center text-xl md:text-2xl font-bold text-gray-800" id="timerText">00:00</div>
+                <div class="timer-text absolute inset-0 flex items-center justify-center text-xl font-bold text-gray-800" id="timerTextMobile">00:00</div>
             </div>
-            <div id="motivacionalTexto" class="text-blue-700 font-semibold text-center hidden text-base md:text-lg"></div>
+            <div id="motivacionalTextoMobile" class="text-blue-700 font-semibold text-center hidden text-base"></div>
         </div>
     </div>
 </div>
