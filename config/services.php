@@ -39,9 +39,10 @@ return [
     'key'      => env('NEWSAPI_KEY'),
 ],
   'recaptcha' => [
-    'site' => env('RECAPTCHA_SITE_KEY'),
-    'secret' => env('RECAPTCHA_SECRET_KEY'),
+    'sitekey' => env('NOCAPTCHA_SITEKEY'),
+    'secret' => env('NOCAPTCHA_SECRET'),
 ],
+
 
 
 
