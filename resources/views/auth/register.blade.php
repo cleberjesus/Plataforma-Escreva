@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Cadastro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="{{ asset('icons/logo-secundaria.ico') }}">
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
@@ -181,7 +182,7 @@
 
                 {{-- reCAPTCHA --}}
                 <div class="form-wrapper">
-                    <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.site') }}"></div>
+                    <div class="g-recaptcha" data-sitekey="RECAPTCHA_SITE_KEY"></div>
                     @if ($errors->has('g-recaptcha-response'))
                         <p class="text-red-500 text-sm mt-1">{{ $errors->first('g-recaptcha-response') }}</p>
                     @endif
