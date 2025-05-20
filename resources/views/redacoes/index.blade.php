@@ -161,7 +161,6 @@
 
 <!-- Scripts -->
 <script>
-<<<<<<< HEAD
     // Manter os scripts que já foram fornecidos anteriormente aqui
     
     // Alterna campos com base no modo de envio selecionado
@@ -219,7 +218,6 @@
         }
     }
 
-=======
     document.addEventListener('DOMContentLoaded', function () {
         // Principal
         const modoEnvio = document.getElementById('modo_envio');
@@ -301,6 +299,5 @@
             }
         }
     });
->>>>>>> 3952a78559cb4cdb6bc0f678200d5a43b6ae9211
 </script>
 @endsection
