@@ -182,7 +182,7 @@
 
                 {{-- reCAPTCHA --}}
                 <div class="form-wrapper">
-                    <div class="g-recaptcha" data-sitekey="RECAPTCHA_SITE_KEY"></div>
+                    <div class="g-recaptcha" data-sitekey="{{ config('services.recaptcha.sitekey') }}"></div>
                     @if ($errors->has('g-recaptcha-response'))
                         <p class="text-red-500 text-sm mt-1">{{ $errors->first('g-recaptcha-response') }}</p>
                     @endif
