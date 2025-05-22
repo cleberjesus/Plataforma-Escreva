@@ -171,10 +171,17 @@ function atualizarTimer() {
         
         let minutos = Math.floor(tempoRestante / 60).toString().padStart(2, '0');
         let segundos = (tempoRestante % 60).toString().padStart(2, '0');
-        timerText.textContent = `${minutos}:${segundos}`;
         
+        // Atualiza o timer desktop
+        timerText.textContent = `${minutos}:${segundos}`;
         let progresso = (tempoRestante / tempoTotal) * 264;
         progressCircle.style.strokeDashoffset = progresso;
+        
+        // Atualiza o timer mobile
+        const timerTextMobile = document.getElementById('timerTextMobile');
+        const progressMobile = document.getElementById('progressMobile');
+        timerTextMobile.textContent = `${minutos}:${segundos}`;
+        progressMobile.style.strokeDashoffset = progresso;
         
         if (tempoRestante <= 0) {
             clearInterval(intervalo);
@@ -206,12 +213,13 @@ document.getElementById('nivelForm').addEventListener('submit', function (event)
     const frequencia = document.getElementById('frequencia').value;
     const conhecimento = document.getElementById('conhecimento').value;
 
+    // Define o tempo total baseado no nível
     if (experiencia === 'avancado' && frequencia === 'avancado' && conhecimento === 'avancado') {
-        tempoTotal = 1200;
+        tempoTotal = 1200; // 20 minutos
     } else if (experiencia === 'intermediario' || frequencia === 'intermediario' || conhecimento === 'intermediario') {
-        tempoTotal = 2100;
+        tempoTotal = 2100; // 35 minutos
     } else {
-        tempoTotal = 3600;
+        tempoTotal = 3600; // 60 minutos
     }
 
     tempoRestante = tempoTotal;
