@@ -61,16 +61,18 @@
                             <div class="space-y-6">
                                 @foreach ($redacoes as $redacao)
                                     <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all">
-                                        <h4 class="font-bold text-xl text-gray-800">{{ $redacao->tema }}</h4>
-                                        <p class="text-gray-500 text-sm mb-4">
-                                            Enviado em {{ $redacao->created_at->format('d/m/Y H:i') }}
-                                        </p>
+                                        <div class="cursor-pointer" onclick="abrirModalRedacao('{{ addslashes($redacao->tema) }}', '{{ $redacao->modo_envio }}', '{{ addslashes($redacao->texto_redacao ?? '') }}', '{{ $redacao->imagem_redacao ? asset('storage/' . $redacao->imagem_redacao) : '' }}')">
+                                            <h4 class="font-bold text-xl text-gray-800">{{ $redacao->tema }}</h4>
+                                            <p class="text-gray-500 text-sm mb-4">
+                                                Enviado em {{ $redacao->created_at->format('d/m/Y H:i') }}
+                                            </p>
 
-                                        @if ($redacao->modo_envio === 'digitado')
-                                            <p class="text-gray-700">{{ Str::limit($redacao->texto_redacao, 150) }}</p>
-                                        @else
-                                            <img src="{{ asset('storage/' . $redacao->imagem_redacao) }}" class="rounded-lg shadow-md max-h-48 mx-auto mb-4">
-                                        @endif
+                                            @if ($redacao->modo_envio === 'digitado')
+                                                <p class="text-gray-700">{{ Str::limit($redacao->texto_redacao, 150) }}</p>
+                                            @else
+                                                <img src="{{ asset('storage/' . $redacao->imagem_redacao) }}" class="rounded-lg shadow-md max-h-48 mx-auto mb-4">
+                                            @endif
+                                        </div>
 
                                         <div class="flex justify-between items-center mt-4">
                                             <button onclick="abrirModalEditar({{ $redacao->id }}, '{{ addslashes($redacao->tema) }}', '{{ $redacao->modo_envio }}', '{{ addslashes($redacao->texto_redacao ?? '') }}')" 
@@ -151,6 +153,25 @@
                             <button onclick="confirmarExclusao()" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
                                 Apagar
                             </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal de Visualização da Redação -->
+                <div id="modal-redacao" class="fixed inset-0 bg-black bg-opacity-50 hidden justify-center items-center z-50">
+                    <div class="bg-white p-6 rounded-xl shadow-lg w-full max-w-md relative">
+                        <button onclick="fecharModalRedacao()" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800 text-2xl">&times;</button>
+                        
+                        <h2 class="text-2xl font-bold mb-6 text-center">Visualizar Redação</h2>
+                        
+                        <div class="space-y-6">
+                            <div>
+                                <h3 id="redacao-tema" class="text-xl font-semibold text-gray-800 mb-2"></h3>
+                            </div>
+
+                            <div id="redacao-conteudo" class="mt-4">
+                                <!-- O conteúdo será inserido aqui via JavaScript -->
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -298,6 +319,69 @@
                 document.getElementById(`form-apagar-${idParaExcluir}`).submit();
             }
         }
+
+        // Funções para o modal de visualização da redação
+        function abrirModalRedacao(tema, modo, texto, imagemUrl) {
+            const modal = document.getElementById('modal-redacao');
+            const temaElement = document.getElementById('redacao-tema');
+            const conteudoElement = document.getElementById('redacao-conteudo');
+            
+            temaElement.textContent = tema;
+            conteudoElement.innerHTML = '';
+
+            if (modo === 'digitado') {
+                const textoElement = document.createElement('p');
+                textoElement.className = 'text-gray-700 whitespace-pre-wrap';
+                textoElement.textContent = texto;
+                conteudoElement.appendChild(textoElement);
+            } else if (imagemUrl) {
+                const imgContainer = document.createElement('div');
+                imgContainer.className = 'flex justify-center';
+                
+                const img = document.createElement('img');
+                img.src = imagemUrl;
+                img.className = 'rounded-lg shadow-md max-w-full cursor-zoom-in';
+                img.style.maxHeight = '400px';
+                
+                // Adiciona funcionalidade de zoom ao clicar na imagem
+                let zoomed = false;
+                img.onclick = function() {
+                    zoomed = !zoomed;
+                    if (zoomed) {
+                        img.style.transform = 'scale(1.5)';
+                        img.style.cursor = 'zoom-out';
+                    } else {
+                        img.style.transform = 'scale(1)';
+                        img.style.cursor = 'zoom-in';
+                    }
+                };
+                
+                imgContainer.appendChild(img);
+                conteudoElement.appendChild(imgContainer);
+            }
+
+            modal.classList.remove('hidden');
+            modal.style.display = 'flex';
+        }
+
+        function fecharModalRedacao() {
+            const modal = document.getElementById('modal-redacao');
+            modal.classList.add('hidden');
+        }
+
+        // Fechar modal ao clicar fora dele
+        document.getElementById('modal-redacao').addEventListener('click', function(e) {
+            if (e.target === this) {
+                fecharModalRedacao();
+            }
+        });
+
+        // Fechar modal com a tecla ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                fecharModalRedacao();
+            }
+        });
     });
 </script>
 @endsection
