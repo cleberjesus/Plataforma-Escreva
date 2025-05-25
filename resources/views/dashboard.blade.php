@@ -17,7 +17,7 @@
             <div class="px-8 py-12 sm:px-12 lg:px-16">
                 <div class="flex flex-col md:flex-row items-center justify-between">
                     <div class="mb-8 md:mb-0 md:mr-8">
-                        <h3 class="text-3xl font-bold text-white mb-4">Plano Premium</h3>
+                        <h3 class="text-3xl font-bold text-white mb-4">Escreva PLUS</h3>
                         <p class="text-lg text-indigo-100 mb-6">Desbloqueie todo o potencial da plataforma com recursos exclusivos:</p>
                         <ul class="space-y-3 text-indigo-100">
                             <li class="flex items-center">
