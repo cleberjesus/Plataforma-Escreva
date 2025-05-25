@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->call([
-            TemasSeeder::class
+            TemasSeeder::class,
+            RedacoesCorrigidasSeeder::class,
         ]);
     }
 }
