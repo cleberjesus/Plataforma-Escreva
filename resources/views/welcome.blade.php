@@ -358,7 +358,7 @@
   </div>
 </section>
 
-<<footer style="background: linear-gradient(to right, #1e293b, #0f172a); color: white; padding: 60px 20px;">
+<footer style="background: linear-gradient(to right, #1e293b, #0f172a); color: white; padding: 60px 20px;">
   <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 40px;">
     
     <div style="flex: 1; min-width: 200px;">
