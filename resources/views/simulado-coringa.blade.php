@@ -36,33 +36,39 @@
     <div id="contagemRegressiva" class="hidden text-4xl md:text-6xl text-center text-blue font-extrabold mb-6 animate-pulse"></div>
 
     <!-- Conteúdo principal -->
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 hidden" id="simuladoContainer">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 hidden" id="simuladoContainer">
         <!-- Área do tema e texto motivador -->
-        <div class="bg-white p-4 md:p-6 rounded-2xl shadow-xl mx-auto max-w-2xl w-full flex flex-col items-center justify-center">
-            <div class="text-center mb-5">
-                <div id="resultado" class="p-3 md:p-4 border border-gray-200 rounded-lg hidden bg-gray-50">
-                    <h3 class="text-base md:text-lg font-bold mb-2"><strong>Tema:</strong> <span id="tema" class="text-blue-700"></span></h3>
+        <div class="bg-white p-4 rounded-2xl shadow-xl mx-auto w-full">
+            <div class="text-center">
+                <div id="resultado" class="p-4 border border-gray-200 rounded-lg hidden bg-gray-50">
+                    <!-- Tema -->
+                    <div class="mb-4">
+                        <h3 class="text-lg md:text-xl font-bold text-blue-700">
+                            <span class="block text-gray-600 text-base mb-1">Tema:</span>
+                            <span id="tema" class="leading-relaxed"></span>
+                        </h3>
+                    </div>
                     
                     <!-- Imagem do Tema -->
-                    <div class="mt-4 mb-6">
-                        <img id="imagemTema" src="" alt="Imagem do Tema" class="w-full h-auto max-h-[300px] md:max-h-[400px] object-contain rounded-md border shadow mx-auto hidden">
+                    <div class="my-4">
+                        <img id="imagemTema" src="" alt="Imagem do Tema" class="w-full h-auto max-h-[250px] object-contain rounded-lg shadow-md mx-auto hidden">
                     </div>
 
                     <!-- Textos Motivadores -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <div id="textoMotivador1" class="bg-gray-100 p-3 md:p-4 rounded-md border-l-4 border-blue-600 shadow-sm hidden">
-                            <h3 class="font-semibold mb-2 text-blue-700 text-sm md:text-base">Texto Motivador 1</h3>
-                            <p class="text-xs md:text-sm text-gray-700 whitespace-pre-line break-words"></p>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        <div id="textoMotivador1" class="bg-white p-3 rounded-lg border-l-4 border-blue-600 shadow-sm hidden">
+                            <h3 class="font-semibold mb-2 text-blue-700 text-base">Texto Motivador 1</h3>
+                            <p class="text-sm text-gray-700 whitespace-pre-line break-words leading-snug"></p>
                         </div>
-                        <div id="textoMotivador2" class="bg-gray-100 p-3 md:p-4 rounded-md border-l-4 border-blue-600 shadow-sm hidden">
-                            <h3 class="font-semibold mb-2 text-blue-700 text-sm md:text-base">Texto Motivador 2</h3>
-                            <p class="text-xs md:text-sm text-gray-700 whitespace-pre-line break-words"></p>
+                        <div id="textoMotivador2" class="bg-white p-3 rounded-lg border-l-4 border-blue-600 shadow-sm hidden">
+                            <h3 class="font-semibold mb-2 text-blue-700 text-base">Texto Motivador 2</h3>
+                            <p class="text-sm text-gray-700 whitespace-pre-line break-words leading-snug"></p>
                         </div>
                     </div>
 
                     <!-- Charge -->
                     <div class="mt-4">
-                        <img id="chargeTema" src="" alt="Charge do Tema" class="w-full rounded-lg shadow hidden">
+                        <img id="chargeTema" src="" alt="Charge do Tema" class="w-full max-w-xl mx-auto rounded-lg shadow-md hidden">
                     </div>
                 </div>
             </div>
