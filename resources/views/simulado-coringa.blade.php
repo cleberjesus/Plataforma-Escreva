@@ -76,8 +76,8 @@
 
         <!-- Timer fixo no canto direito em telas md+ -->
         <div class="hidden md:block">
-                 <div class="fixed top-24 right-8 z-40 flex flex-col items-center gap-4">
-        <div class="circle-timer inline-block w-28 h-28 relative mb-2 bg-white rounded-full shadow-xl">
+            <div class="fixed top-24 right-8 z-40 flex flex-col items-center gap-4">
+                <div class="circle-timer inline-block w-28 h-28 relative mb-2 bg-white rounded-full shadow-xl">
                     <svg id="timerSvg" viewBox="0 0 100 100" class="w-full h-full">
                         <circle cx="50" cy="50" r="42" stroke="#e9ecef" stroke-width="10" fill="none"></circle>
                         <circle id="progress" cx="50" cy="50" r="42" stroke="#3b82f6" stroke-width="10" fill="none"
@@ -88,17 +88,19 @@
                 <div id="motivacionalTexto" class="text-blue-700 font-semibold text-center hidden text-lg"></div>
             </div>
         </div>
-        <!-- Timer normal para mobile -->
-        <div class="flex flex-col items-center justify-center gap-6 w-full md:hidden">
-            <div class="circle-timer inline-block w-24 h-24 relative mb-2 bg-white rounded-full shadow-xl">
-                <svg id="timerSvgMobile" viewBox="0 0 100 100" class="w-full h-full">
-                    <circle cx="50" cy="50" r="42" stroke="#e9ecef" stroke-width="10" fill="none"></circle>
-                    <circle id="progressMobile" cx="50" cy="50" r="42" stroke="#3b82f6" stroke-width="10" fill="none"
-                        stroke-dasharray="264" stroke-dashoffset="264" stroke-linecap="round"></circle>
-                </svg>
-                <div class="timer-text absolute inset-0 flex items-center justify-center text-xl font-bold text-gray-800" id="timerTextMobile">00:00</div>
+        <!-- Timer fixo para mobile -->
+        <div class="md:hidden">
+            <div class="fixed top-20 right-4 z-40 flex flex-col items-center gap-4">
+                <div class="circle-timer inline-block w-24 h-24 relative mb-2 bg-white rounded-full shadow-xl">
+                    <svg id="timerSvgMobile" viewBox="0 0 100 100" class="w-full h-full">
+                        <circle cx="50" cy="50" r="42" stroke="#e9ecef" stroke-width="10" fill="none"></circle>
+                        <circle id="progressMobile" cx="50" cy="50" r="42" stroke="#3b82f6" stroke-width="10" fill="none"
+                            stroke-dasharray="264" stroke-dashoffset="264" stroke-linecap="round"></circle>
+                    </svg>
+                    <div class="timer-text absolute inset-0 flex items-center justify-center text-xl font-bold text-gray-800" id="timerTextMobile">00:00</div>
+                </div>
+                <div id="motivacionalTextoMobile" class="text-blue-700 font-semibold text-center hidden text-base bg-white p-2 rounded-lg shadow-md"></div>
             </div>
-            <div id="motivacionalTextoMobile" class="text-blue-700 font-semibold text-center hidden text-base"></div>
         </div>
     </div>
 </div>
@@ -172,7 +174,7 @@ function atualizarTimer() {
     const delta = agora - ultimaAtualizacao;
     
     if (delta >= 1000) {
-        tempoRestante = Math.max(0, tempoRestante - Math.floor(delta / 1000));
+        tempoRestante = Math.max(0, tempoRestante - 1); // Diminui exatamente 1 segundo
         ultimaAtualizacao = agora;
         
         let minutos = Math.floor(tempoRestante / 60).toString().padStart(2, '0');
@@ -192,7 +194,7 @@ function atualizarTimer() {
         if (tempoRestante <= 0) {
             clearInterval(intervalo);
             clearInterval(motivacaoIntervalo);
-            toastr.error('Tempo esgotado!', 'Aviso');
+            mostrarModalTempoEsgotado();
             return;
         }
     }
@@ -221,11 +223,11 @@ document.getElementById('nivelForm').addEventListener('submit', function (event)
 
     // Define o tempo total baseado no nível
     if (experiencia === 'avancado' && frequencia === 'avancado' && conhecimento === 'avancado') {
-        tempoTotal = 1200; // 20 minutos
+        tempoTotal = 1200; // Exatamente 20:00 minutos
     } else if (experiencia === 'intermediario' || frequencia === 'intermediario' || conhecimento === 'intermediario') {
-        tempoTotal = 2100; // 35 minutos
+        tempoTotal = 2100; // Exatamente 35:00 minutos
     } else {
-        tempoTotal = 3600; // 60 minutos
+        tempoTotal = 3600; // Exatamente 60:00 minutos
     }
 
     tempoRestante = tempoTotal;
@@ -315,5 +317,61 @@ document.getElementById('nivelModal').addEventListener('click', (event) => {
         document.getElementById('nivelModal').style.display = 'none';
     }
 });
+
+function mostrarModalTempoEsgotado() {
+    // Criar o modal dinamicamente
+    const modalHTML = `
+        <div id="modalTempoEsgotado" class="fixed inset-0 flex items-center justify-center z-50">
+            <div class="fixed inset-0 bg-black opacity-50"></div>
+            <div class="bg-white rounded-lg p-8 max-w-md w-full mx-4 relative z-10 transform transition-all animate-bounce">
+                <div class="text-center">
+                    <div class="mb-4">
+                        <svg class="mx-auto h-16 w-16 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Tempo Esgotado!</h3>
+                    <p class="text-gray-600 mb-6">Não se preocupe! O importante é que você praticou. 
+                        Que tal revisar sua redação agora?</p>
+                    <div class="space-y-3">
+                        <button onclick="salvarRedacao()" class="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+                            Salvar Redação
+                        </button>
+                        <button onclick="novoSimulado()" class="w-full bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">
+                            Iniciar Novo Simulado
+                        </button>
+                        <button onclick="voltarInicio()" class="w-full bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300 transition">
+                            Voltar ao Início
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Adicionar o modal ao documento
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+    // Tocar um som suave de notificação
+    audio.src = "{{ asset('sounds/timeup.mp3') }}";
+    audio.play().catch(() => {});
+}
+
+function salvarRedacao() {
+    // Implementar a lógica de salvar a redação
+    toastr.success('Sua redação foi salva com sucesso!');
+    voltarInicio();
+}
+
+function novoSimulado() {
+    // Remover o modal
+    document.getElementById('modalTempoEsgotado').remove();
+    // Resetar o formulário e mostrar o modal de nível
+    document.getElementById('nivelModal').style.display = 'flex';
+}
+
+function voltarInicio() {
+    window.location.href = "{{ route('dashboard') }}";
+}
 </script>
 @endsection
