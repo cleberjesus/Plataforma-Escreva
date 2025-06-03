@@ -10,9 +10,9 @@ use Illuminate\Support\Facades\Auth;
 class SimuladoCoringaController extends Controller
 {
     private $temposPorNivel = [
-        'iniciante' => 3600,     // 60 minutos em segundos
-        'intermediario' => 2100,  // 35 minutos em segundos
-        'avancado' => 1200       // 20 minutos em segundos
+        'iniciante' => 3600,     // Exatamente 60:00 minutos em segundos
+        'intermediario' => 2100,  // Exatamente 35:00 minutos em segundos
+        'avancado' => 1200       // Exatamente 20:00 minutos em segundos
     ];
 
     public function index()
