@@ -6,7 +6,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <title>@yield('title', config('app.name', 'Escreva'))</title>
-
+    @stack('styles')
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('icons/logo-secundaria.ico') }}">
@@ -48,5 +48,6 @@
             @yield('content')
         </main>
     </div>
+    @stack('scripts')
 </body>
 </html>
