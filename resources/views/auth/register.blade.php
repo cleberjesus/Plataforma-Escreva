@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Cadastro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="icon" type="image/x-icon" href="{{ asset('icons/logo-secundaria.ico') }}">
+    <link rel="icon" type="image/x-icon" href="{{ asset('icons/logo-secundaria.ico') }}">
 
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.4.55/css/materialdesignicons.min.css">
@@ -106,6 +106,16 @@
             font-size: 0.875rem;
         }
         .mt-1 { margin-top: 0.25rem; }
+        .email-status {
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        .email-status.available {
+            color: #28a745;
+        }
+        .email-status.unavailable {
+            color: #dc3545;
+        }
 
         /* Ajuste para o reCAPTCHA */
         .g-recaptcha {
@@ -150,8 +160,9 @@
                 </div>
 
                 <div class="form-wrapper">
-                    <input type="email" name="email" placeholder="Seu e-mail" value="{{ old('email') }}" required>
+                    <input type="email" name="email" id="email" placeholder="Seu e-mail" value="{{ old('email') }}" required>
                     <i class="mdi mdi-email"></i>
+                    <div id="emailStatus" class="email-status"></div>
                     @error('email')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -216,6 +227,45 @@
                 icon.classList.add('mdi-eye');
             }
         }
+
+        // Verificação de email em tempo real
+        let emailTimeout;
+        const emailInput = document.getElementById('email');
+        const emailStatus = document.getElementById('emailStatus');
+
+        emailInput.addEventListener('input', function() {
+            clearTimeout(emailTimeout);
+            const email = this.value;
+
+            if (email) {
+                emailTimeout = setTimeout(() => {
+                    fetch('{{ route("check.email") }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({ email })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.exists) {
+                            emailStatus.textContent = 'Este e-mail já está em uso';
+                            emailStatus.className = 'email-status unavailable';
+                        } else {
+                            emailStatus.textContent = 'E-mail disponível';
+                            emailStatus.className = 'email-status available';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Erro ao verificar email:', error);
+                    });
+                }, 500); // Aguarda 500ms após o usuário parar de digitar
+            } else {
+                emailStatus.textContent = '';
+                emailStatus.className = 'email-status';
+            }
+        });
     </script>
 </body>
 </html>

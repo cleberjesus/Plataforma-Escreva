@@ -320,9 +320,6 @@
   <div>
     <h2>Benefícios da Plataforma</h2>
     <p>✔ Correção instantânea com IA</p>
-    <p>✔ Sugestões personalizadas</p>
-    <p>✔ Modelos nota 1000</p>
-    <p>✔ Temas atualizados semanalmente</p>
     <div class="testimonial">
       <p>"Minha nota no ENEM subiu de 640 para 950!"</p>
       <small>Ana Beatriz, MG</small>
@@ -338,8 +335,7 @@
       <li>Simulado Coringa</li>
       <li>Correções Comum</li>
       <li>Minhas Redações</li>
-      <li>Espaço de descrição</li>
-      <li>Outros recursos</li>
+
     </ul>
 <button onclick="window.location.href='{{ route('register') }}'">Selecionar</button>
   </div>
@@ -351,7 +347,6 @@
       <li>Simulado Coringa</li>
       <li>Correções Comum</li>
       <li>Minhas Redações</li>
-      <li>Espaço de descrição</li>
       <li>Acesso ilimitado a IA</li>
     </ul>
 <button onclick="window.location.href='{{ route('register') }}'">Selecionar</button>
@@ -375,22 +370,7 @@
       </ul>
     </div>
 
-    <div style="flex: 1; min-width: 150px;">
-      <h4 style="margin-bottom: 10px;">Institucional</h4>
-      <ul style="list-style: none; padding: 0;">
-        <li><a href="#" style="color: #e2e8f0; text-decoration: none;">Política de Privacidade</a></li>
-        <li><a href="#" style="color: #e2e8f0; text-decoration: none;">Termos de Uso</a></li>
-      </ul>
-    </div>
 
-    <div style="flex: 1; min-width: 150px;">
-      <h4 style="margin-bottom: 10px;">Siga-nos</h4>
-      <div style="display: flex; gap: 15px;">
-        <a href="#" title="YouTube"><img src="/icons/youtube.svg" alt="YouTube" style="width: 24px;"></a>
-        <a href="#" title="Instagram"><img src="/icons/instagram.svg" alt="Instagram" style="width: 24px;"></a>
-        <a href="#" title="TikTok"><img src="/icons/tiktok.svg" alt="TikTok" style="width: 24px;"></a>
-      </div>
-    </div>
 
   </div>
 
