@@ -42,6 +42,9 @@ Route::middleware('auth')->group(function () {
         Route::post('{cronograma}/atividades', [CronogramaAtividadeController::class, 'store'])->name('cronograma.atividades.store');
         Route::delete('{cronograma}/atividades/{atividade}', [CronogramaAtividadeController::class, 'destroy'])->name('cronograma.atividades.destroy');
     });
+
+    // Redações (apenas resource, sem duplicidade)
+    Route::resource('redacoes', RedacaoController::class);
 });
 
 // Simulado Coringa
@@ -58,22 +61,6 @@ Route::get('/simulado-comum', [SimuladoComumController::class, 'index'])->name('
 // Página de um tema específico
 Route::get('/simulado/{slug}', [SimuladoComumController::class, 'mostrarTema'])->name('simulado.tema');
 
-// Redações
-Route::prefix('redacoes')->group(function () {
-    Route::get('/', [RedacaoController::class, 'index'])->name('redacoes.index');
-    Route::post('/', [RedacaoController::class, 'store'])->name('redacoes.store');
-    Route::get('/{id}/edit', [RedacaoController::class, 'edit'])->name('redacoes.edit');
-    Route::put('/{id}', [RedacaoController::class, 'update'])->name('redacoes.update');
-    Route::delete('/{id}', [RedacaoController::class, 'destroy'])->name('redacoes.destroy');
-});
-
-// Leituras
-Route::get('/leituras', [LeiaController::class, 'mostrarLeituras'])->name('leituras');
-
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/assinar', [AssinaturaController::class, 'assinar'])->name('assinar.premium');
-});
 Route::get('/assinatura/sucesso', [AssinaturaController::class, 'sucesso'])->name('assinatura.sucesso');
 
 // Auth scaffolding
