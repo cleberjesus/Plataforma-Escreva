@@ -114,4 +114,21 @@ class RedacaoController extends Controller
 
         return redirect()->route('redacoes.index')->with('success', 'Redação deletada com sucesso!');
     }
+
+    public function create()
+    {
+        return view('redacoes.create');
+    }
+
+    public function edit($id)
+    {
+        $redacao = Redacao::findOrFail($id);
+        return view('redacoes.edit', compact('redacao'));
+    }
+
+    public function show($id)
+    {
+        $redacao = Redacao::findOrFail($id);
+        return view('redacoes.show', compact('redacao'));
+    }
 }
