@@ -149,6 +149,8 @@
 <!-- ÁUDIO DA CONTAGEM -->
 <audio id="audioContagem" src="{{ asset('sounds/countdowngame.mp3') }}" preload="auto"></audio>
 
+<audio id="audioContagem" src="https://cdn.pixabay.com/audio/2022/03/15/audio_95c8a22157.mp3" preload="auto"></audio>
+
 <script>
 let tempoTotal = 3600;
 let tempoRestante = tempoTotal;
@@ -174,18 +176,16 @@ function atualizarTimer() {
     const delta = agora - ultimaAtualizacao;
     
     if (delta >= 1000) {
-        tempoRestante = Math.max(0, tempoRestante - 1); // Diminui exatamente 1 segundo
+        tempoRestante = Math.max(0, tempoRestante - 1);
         ultimaAtualizacao = agora;
         
         let minutos = Math.floor(tempoRestante / 60).toString().padStart(2, '0');
         let segundos = (tempoRestante % 60).toString().padStart(2, '0');
         
-        // Atualiza o timer desktop
         timerText.textContent = `${minutos}:${segundos}`;
         let progresso = (tempoRestante / tempoTotal) * 264;
         progressCircle.style.strokeDashoffset = progresso;
-        
-        // Atualiza o timer mobile
+
         const timerTextMobile = document.getElementById('timerTextMobile');
         const progressMobile = document.getElementById('progressMobile');
         timerTextMobile.textContent = `${minutos}:${segundos}`;
@@ -221,13 +221,12 @@ document.getElementById('nivelForm').addEventListener('submit', function (event)
     const frequencia = document.getElementById('frequencia').value;
     const conhecimento = document.getElementById('conhecimento').value;
 
-    // Define o tempo total baseado no nível
     if (experiencia === 'avancado' && frequencia === 'avancado' && conhecimento === 'avancado') {
-        tempoTotal = 1200; // Exatamente 20:00 minutos
+        tempoTotal = 1200;
     } else if (experiencia === 'intermediario' || frequencia === 'intermediario' || conhecimento === 'intermediario') {
-        tempoTotal = 2100; // Exatamente 35:00 minutos
+        tempoTotal = 2100;
     } else {
-        tempoTotal = 3600; // Exatamente 60:00 minutos
+        tempoTotal = 3600;
     }
 
     tempoRestante = tempoTotal;
@@ -273,15 +272,14 @@ function gerarTema() {
         .then(response => response.json())
         .then(data => {
             document.getElementById('tema').textContent = data.tema;
-            
-            // Exibe os textos motivadores
+
             const texto1 = document.getElementById('textoMotivador1');
             const texto2 = document.getElementById('textoMotivador2');
-            
+
             if (data.textos && data.textos.length > 0) {
                 texto1.classList.remove('hidden');
                 texto1.querySelector('p').textContent = data.textos[0];
-                
+
                 if (data.textos.length > 1) {
                     texto2.classList.remove('hidden');
                     texto2.querySelector('p').textContent = data.textos[1];
@@ -290,14 +288,12 @@ function gerarTema() {
                 }
             }
 
-            // Exibe a imagem do tema
             if (data.imagem) {
                 const imagem = document.getElementById('imagemTema');
                 imagem.src = '/images/temas/' + data.imagem;
                 imagem.classList.remove('hidden');
             }
 
-            // Exibe a charge se existir
             if (data.charges && data.charges.length > 0) {
                 const charge = document.getElementById('chargeTema');
                 charge.src = '/images/temas/' + data.charges[0];
@@ -312,14 +308,8 @@ function gerarTema() {
 document.getElementById('closeModal').addEventListener('click', () => {
     document.getElementById('nivelModal').style.display = 'none';
 });
-document.getElementById('nivelModal').addEventListener('click', (event) => {
-    if (event.target === document.getElementById('nivelModal')) {
-        document.getElementById('nivelModal').style.display = 'none';
-    }
-});
 
 function mostrarModalTempoEsgotado() {
-    // Criar o modal dinamicamente
     const modalHTML = `
         <div id="modalTempoEsgotado" class="fixed inset-0 flex items-center justify-center z-50">
             <div class="fixed inset-0 bg-black opacity-50"></div>
@@ -349,24 +339,21 @@ function mostrarModalTempoEsgotado() {
         </div>
     `;
 
-    // Adicionar o modal ao documento
     document.body.insertAdjacentHTML('beforeend', modalHTML);
 
-    // Tocar um som suave de notificação
+    // TOCAR SOM DE FIM
     audio.src = "{{ asset('sounds/timeup.mp3') }}";
+    audio.currentTime = 0;
     audio.play().catch(() => {});
 }
 
 function salvarRedacao() {
-    // Implementar a lógica de salvar a redação
     toastr.success('Sua redação foi salva com sucesso!');
     voltarInicio();
 }
 
 function novoSimulado() {
-    // Remover o modal
     document.getElementById('modalTempoEsgotado').remove();
-    // Resetar o formulário e mostrar o modal de nível
     document.getElementById('nivelModal').style.display = 'flex';
 }
 
@@ -374,4 +361,5 @@ function voltarInicio() {
     window.location.href = "{{ route('dashboard') }}";
 }
 </script>
+
 @endsection
