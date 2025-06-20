@@ -187,7 +187,7 @@
                 <div class="terms">
                     <label>
                         <input type="checkbox" required>
-                        Concordo com os <a href="#">Termos de serviço</a>
+                        Concordo com os <a href="{{ route('terms') }}">Termos de serviço</a>
                     </label>
                 </div>
 

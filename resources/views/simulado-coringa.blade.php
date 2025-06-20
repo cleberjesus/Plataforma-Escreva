@@ -38,7 +38,7 @@
     <!-- Conteúdo principal -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 hidden" id="simuladoContainer">
         <!-- Área do tema e texto motivador -->
-        <div class="bg-white p-4 rounded-2xl shadow-xl mx-auto w-full">
+        <div class="bg-white p-4 rounded-2xl shadow-xl mx-auto w-full max-w-4xl">
             <div class="text-center">
                 <div id="resultado" class="p-4 border border-gray-200 rounded-lg hidden bg-gray-50">
                     <!-- Tema -->
@@ -55,21 +55,18 @@
                     </div>
 
                     <!-- Textos Motivadores -->
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        <div id="textoMotivador1" class="bg-white p-3 rounded-lg border-l-4 border-blue-600 shadow-sm hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                        <div id="textoMotivador1" class="bg-white p-4 rounded-lg border-l-4 border-blue-600 shadow-sm">
                             <h3 class="font-semibold mb-2 text-blue-700 text-base">Texto Motivador 1</h3>
                             <p class="text-sm text-gray-700 whitespace-pre-line break-words leading-snug"></p>
                         </div>
-                        <div id="textoMotivador2" class="bg-white p-3 rounded-lg border-l-4 border-blue-600 shadow-sm hidden">
+                        <div id="textoMotivador2" class="bg-white p-4 rounded-lg border-l-4 border-blue-600 shadow-sm">
                             <h3 class="font-semibold mb-2 text-blue-700 text-base">Texto Motivador 2</h3>
                             <p class="text-sm text-gray-700 whitespace-pre-line break-words leading-snug"></p>
                         </div>
                     </div>
 
-                    <!-- Charge -->
-                    <div class="mt-4">
-                        <img id="chargeTema" src="" alt="Charge do Tema" class="w-full max-w-xl mx-auto rounded-lg shadow-md hidden">
-                    </div>
+                    
                 </div>
             </div>
         </div>

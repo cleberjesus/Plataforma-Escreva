@@ -9,6 +9,24 @@
         </p>
     </header>
 
+    {{-- Mensagens de erro --}}
+    @if ($errors->any())
+        <div class="mb-4 text-sm text-red-600">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    {{-- Mensagem de sucesso --}}
+    @if (session('status') === 'profile-updated')
+        <div class="mb-4 text-sm text-green-600">
+            Alterações salvas com sucesso.
+        </div>
+    @endif
+
     <form id="send-verification" method="post" action="{{ route('verification.send') }}">
         @csrf
     </form>
@@ -47,15 +65,16 @@
             @endif
         </div>
 
+        <div class="form-group">
+            <label for="current_password" class="form-label">Confirme sua senha</label>
+            <input id="current_password" name="current_password" type="password" class="form-input" required autocomplete="current-password" />
+            <x-input-error class="mt-2" :messages="$errors->get('current_password')" />
+        </div>
+
         <div class="flex items-center gap-4">
             <button type="submit" class="btn-primary">
                 Salvar Alterações
             </button>
-
-            @if (session('status') === 'profile-updated')
-                <p class="text-sm text-gray-600">Alterações salvas com sucesso.</p>
-            @endif
         </div>
     </form>
 </section>
-

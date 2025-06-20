@@ -305,7 +305,7 @@
   <div class="hero-text">
     <h1>Sua Redação Nota 1000 Começa Aqui</h1>
     <p>Corrigida por IA. Com sugestões, temas e exemplos de excelência.</p>
-    <a href="#planos" class="btn">Começar Agora</a>
+    <a href="{{ route('register') }}" class="btn">Começar Agora</a>
   </div>
   <img src="/images/home-illustration.png" alt="Ilustração IA corrigindo redação" class="hero-img">
 </section>
@@ -370,7 +370,10 @@
       </ul>
     </div>
 
-
+    <div class="footer-links">
+    
+    
+    </div>
 
   </div>
 
