@@ -9,7 +9,9 @@ use App\Http\Controllers\{
     RedacaoController,
     LeiaController,
     CronogramaController,
-    CronogramaAtividadeController
+    CronogramaAtividadeController,
+    QuizController,
+    GraficoController
 };
 
 /*
@@ -20,6 +22,7 @@ use App\Http\Controllers\{
 
 // Páginas públicas
 Route::get('/', fn () => view('welcome'));
+Route::get('/termos-de-servico', fn () => view('terms'))->name('terms');
 Route::get('/dashboard', fn () => view('dashboard'))->middleware(['auth', 'verified'])->name('dashboard');
 
 // Autenticado
@@ -45,6 +48,12 @@ Route::middleware('auth')->group(function () {
 
     // Redações (apenas resource, sem duplicidade)
     Route::resource('redacoes', RedacaoController::class);
+
+    // Gráficos
+    Route::get('/graficos/redacoes-por-mes', [GraficoController::class, 'redacoesPorMes'])->name('graficos.redacoes');
+
+    // Quiz
+    Route::get('/quiz', [QuizController::class, 'index'])->name('quiz.index');
 });
 
 // Simulado Coringa
