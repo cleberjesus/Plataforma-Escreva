@@ -197,11 +197,11 @@
                     @enderror
                 </div>
 
-                <label class="remember-me">
+            <label class="remember-me" style="margin-bottom: 16px; display: inline-block;">
                     <input type="checkbox" name="remember"> Lembrar-me
                 </label>
 
-                <button type="submit">Entrar</button>
+        <button type="submit">Entrar</button>
 
                 <div class="text-links">
                     <a href="{{ route('register') }}">Criar uma conta</a> |
