@@ -11,7 +11,13 @@
             <div class="p-6 sm:p-10">
                 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8 gap-4">
                     <h3 class="text-2xl font-bold text-gray-800 text-center sm:text-left">Redações Armazenadas</h3>
-                    <a href="{{ route('redacoes.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold shadow transition-all text-center">+ Nova Redação</a>
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <a href="{{ route('graficos.redacoes') }}" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold shadow transition-all text-center flex items-center justify-center gap-2">
+                            <i class="fas fa-chart-line"></i>
+                            Ver Gráfico
+                        </a>
+                        <a href="{{ route('redacoes.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold shadow transition-all text-center">+ Nova Redação</a>
+                    </div>
                 </div>
 
                 @if ($redacoes->isEmpty())
