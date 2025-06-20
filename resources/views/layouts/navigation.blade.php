@@ -18,6 +18,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white font-[Montserrat]">
+                        <img src="/icons/home.png" alt="Ícone do Painel" class="h-6 w-6 inline-block mr-1" />
                         {{ __('Painel') }}
                     </x-nav-link>
 
@@ -34,6 +35,11 @@
                     <x-nav-link :href="route('redacoes.index')" :active="request()->routeIs('redacoes.index')" class="text-white font-[Montserrat]">
                         <img src="/icons/contract.png" alt="Ícone de Minhas Redações" class="h-6 w-6 inline-block mr-1" />
                         {{ __('Minhas Redações') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('quiz.index')" :active="request()->routeIs('quiz.index')" class="text-white font-[Montserrat]">
+                        <img src="/icons/quiz.png" alt="Ícone de Quiz" class="h-6 w-6 inline-block mr-1" />
+                        {{ __('Quiz Interativo') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -84,6 +90,7 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-[#3D44D9] font-[Montserrat] text-white">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" class="text-white font-[Montserrat]">
+             <img src="/icons/home.png" alt="Ícone do Painel" class="h-6 w-6 inline-block mr-1" />   
                 {{ __('Painel') }}
             </x-responsive-nav-link>
 
@@ -100,6 +107,11 @@
             <x-responsive-nav-link :href="route('redacoes.index')" :active="request()->routeIs('redacoes.index')" class="text-white font-[Montserrat]">
                 <img src="/icons/contract.png" alt="Ícone de Minhas Redações" class="h-6 w-6 inline-block mr-1" />
                 {{ __('Minhas Redações') }}
+            </x-responsive-nav-link>
+
+            <x-responsive-nav-link :href="route('quiz.index')" :active="request()->routeIs('quiz.index')" class="text-white font-[Montserrat]">
+                <img src="/icons/quiz.png" alt="Ícone de Quiz" class="h-6 w-6 inline-block mr-1" />
+                {{ __('Quiz Interativo') }}
             </x-responsive-nav-link>
         </div>
 
