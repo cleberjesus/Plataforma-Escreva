@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-<title>@yield('title', config('app.name', 'Escreva'))</title>
-    @stack('styles')
-
+    <title>@yield('title', config('app.name', 'Escreva'))</title>
+    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('icons/logo-secundaria.ico') }}">
 
@@ -29,6 +28,10 @@
 
     <!-- Scripts -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    
+    <!-- Page specific styles -->
+    @yield('styles')
+    @stack('styles')
 </head>
 <body class="font-sans antialiased bg-white">
     <div class="min-h-screen bg-white">

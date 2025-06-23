@@ -60,7 +60,8 @@ Route::middleware('auth')->group(function () {
 Route::prefix('simulado-coringa')->group(function () {
     Route::get('/', [SimuladoCoringaController::class, 'index'])->name('simulado-coringa');
     Route::get('/gerar-tema', [SimuladoCoringaController::class, 'gerarTema'])->name('simulado-coringa.gerarTema');
-    Route::get('/finalizar', [SimuladoCoringaController::class, 'finalizarSimulado'])->name('simulado-coringa.finalizar');
+    Route::post('/salvar-redacao', [SimuladoCoringaController::class, 'salvarRedacao'])->name('simulado-coringa.salvarRedacao');
+    Route::post('/finalizar', [SimuladoCoringaController::class, 'finalizarSimulado'])->name('simulado-coringa.finalizar');
     Route::post('/iniciar', [SimuladoCoringaController::class, 'iniciar'])->name('simulado.iniciar');
 });
 

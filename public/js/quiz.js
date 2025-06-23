@@ -4,8 +4,8 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             question: "Qual frase utiliza a crase corretamente?",
             answers: [
-                { text: "Fui à farmácia comprar remédios.", correct: true },
                 { text: "Obrigado a todos pela presença.", correct: false },
+                { text: "Fui à farmácia comprar remédios.", correct: true },
                 { text: "Ele chegou a tempo para a reunião.", correct: false },
                 { text: "Ela começou a rir sem parar.", correct: false }
             ]
@@ -13,18 +13,18 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             question: "Indique a alternativa em que o uso do acento grave indicativo da crase é obrigatório.",
             answers: [
-                { text: "Devo tudo à minha mãe.", correct: true },
                 { text: "O navio chegou a Bahia.", correct: false },
+                { text: "Dirigiu-se a ela com respeito.", correct: false },
                 { text: "Ele prefere morrer a ter que trabalhar.", correct: false },
-                { text: "Dirigiu-se a ela com respeito.", correct: false }
+                { text: "Devo tudo à minha mãe.", correct: true }
             ]
         },
         {
             question: "Em qual das opções a crase foi empregada de forma incorreta?",
             answers: [
                 { text: "Referiu-se àquilo que não conhecia.", correct: false },
-                { text: "Não vou à festas que não sou convidado.", correct: true },
                 { text: "Às vezes, penso em desistir de tudo.", correct: false },
+                { text: "Não vou à festas que não sou convidado.", correct: true },
                 { text: "Entreguei o prêmio à melhor aluna.", correct: false }
             ]
         },
@@ -40,67 +40,68 @@ document.addEventListener('DOMContentLoaded', () => {
         {
             question: "Assinale a frase em que 'a' ou 'as' deve receber o acento da crase:",
             answers: [
-                { text: "A empresa oferece boas condições de trabalho a suas funcionárias.", correct: false },
-                { text: "O menino não deu importância a pequena sugestão.", correct: true },
                 { text: "Voltei a casa dos meus pais.", correct: false },
-                { text: "Puseram-se a discutir em voz alta.", correct: false }
+                { text: "Puseram-se a discutir em voz alta.", correct: false },
+                { text: "O menino não deu importância a pequena sugestão.", correct: true },
+                { text: "A empresa oferece boas condições de trabalho a suas funcionárias.", correct: false }
             ]
         },
         {
-        question: "Assinale a frase em que há uso correto da vírgula:",
-        answers: [
-            { text: "Os alunos que estudam bastante, geralmente, conseguem boas notas.", correct: true },
-            { text: "Maria foi na escola e, depois foi ao mercado.", correct: false },
-            { text: "O professor explicou o conteúdo mas, ninguém entendeu.", correct: false },
-            { text: "João chegou cedo, porém foi embora antes do término da aula.", correct: false }
-        ]
-    },
-    {
-        question: "Em qual alternativa o termo destacado é uma conjunção conclusiva?",
-        answers: [
-            { text: "Estudou bastante, portanto, passou na prova.", correct: true },
-            { text: "Gostaria que você viesse, porém entendo se não puder.", correct: false },
-            { text: "Se chover, não sairemos.", correct: false },
-            { text: "Assim que cheguei, liguei para ela.", correct: false }
-        ]
-    },
-    {
-        question: "Qual das alternativas apresenta um erro de regência verbal?",
-        answers: [
-            { text: "Prefiro estudar em casa.", correct: false },
-            { text: "Assisti o filme ontem.", correct: true },
-            { text: "Gostaria de agradecer aos professores.", correct: false },
-            { text: "Obedecemos às regras da escola.", correct: false }
-        ]
-    },
-    {
-        question: "Qual é a estrutura básica de uma redação dissertativa-argumentativa exigida no ENEM?",
-        answers: [
-            { text: "Introdução, Desenvolvimento e Conclusão.", correct: true },
-            { text: "Resumo, Introdução e Desenvolvimento.", correct: false },
-            { text: "Conclusão, Introdução e Desenvolvimento.", correct: false },
-            { text: "Desenvolvimento, Introdução e Referências.", correct: false }
-        ]
-    },
-    {
-        question: "Identifique a alternativa em que há um problema de concordância verbal:",
-        answers: [
-            { text: "Faltam informações importantes no texto.", correct: false },
-            { text: "Houveram muitos problemas na redação.", correct: true },
-            { text: "Existem várias formas de começar um texto.", correct: false },
-            { text: "Restam poucas dúvidas sobre o tema.", correct: false }
-        ]
-    },
-    {
-        question: "Sobre o uso da crase, marque a alternativa correta:",
-        answers: [
-            { text: "Entreguei o trabalho à professora.", correct: true },
-            { text: "Cheguei à noite e fui dormir cedo.", correct: true },
-            { text: "Ele foi a escola com os amigos.", correct: false },
-            { text: "Voltou a casa cansado.", correct: false }
-        ]
-    }
+            question: "Assinale a frase em que há uso correto da vírgula:",
+            answers: [
+                { text: "Maria foi na escola e, depois foi ao mercado.", correct: false },
+                { text: "O professor explicou o conteúdo mas, ninguém entendeu.", correct: false },
+                { text: "João chegou cedo, porém foi embora antes do término da aula.", correct: false },
+                { text: "Os alunos que estudam bastante, geralmente, conseguem boas notas.", correct: true }
+            ]
+        },
+        {
+            question: "Em qual alternativa o termo destacado é uma conjunção conclusiva?",
+            answers: [
+                { text: "Gostaria que você viesse, porém entendo se não puder.", correct: false },
+                { text: "Se chover, não sairemos.", correct: false },
+                { text: "Assim que cheguei, liguei para ela.", correct: false },
+                { text: "Estudou bastante, portanto, passou na prova.", correct: true }
+            ]
+        },
+        {
+            question: "Qual das alternativas apresenta um erro de regência verbal?",
+            answers: [
+                { text: "Prefiro estudar em casa.", correct: false },
+                { text: "Gostaria de agradecer aos professores.", correct: false },
+                { text: "Obedecemos às regras da escola.", correct: false },
+                { text: "Assisti o filme ontem.", correct: true }
+            ]
+        },
+        {
+            question: "Qual é a estrutura básica de uma redação dissertativa-argumentativa exigida no ENEM?",
+            answers: [
+                { text: "Conclusão, Introdução e Desenvolvimento.", correct: false },
+                { text: "Resumo, Introdução e Desenvolvimento.", correct: false },
+                { text: "Introdução, Desenvolvimento e Conclusão.", correct: true },
+                { text: "Desenvolvimento, Introdução e Referências.", correct: false }
+            ]
+        },
+        {
+            question: "Identifique a alternativa em que há um problema de concordância verbal:",
+            answers: [
+                { text: "Faltam informações importantes no texto.", correct: false },
+                { text: "Restam poucas dúvidas sobre o tema.", correct: false },
+                { text: "Existem várias formas de começar um texto.", correct: false },
+                { text: "Houveram muitos problemas na redação.", correct: true }
+            ]
+        },
+        {
+            question: "Sobre o uso da crase, marque a alternativa correta:",
+            answers: [
+                { text: "Ele foi a escola com os amigos.", correct: false },
+                { text: "Voltou a casa cansado.", correct: false },
+                { text: "Entreguei o trabalho à professora.", correct: true },
+                { text: "Cheguei à noite e fui dormir cedo.", correct: true }
+            ]
+        }
     ];
+    
 
     const questionTextElement = document.getElementById('question-text');
     const answerButtonsElement = document.getElementById('answer-buttons');
@@ -113,6 +114,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentQuestionIndex = 0;
     let score = 0;
+
+    // Função para embaralhar um array (Fisher-Yates)
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
 
     function startQuiz() {
         currentQuestionIndex = 0;
@@ -128,6 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function showQuestion() {
         resetState();
         let currentQuestion = questions[currentQuestionIndex];
+        // Embaralha as alternativas antes de mostrar
+        shuffleArray(currentQuestion.answers);
         questionTextElement.innerText = currentQuestion.question;
 
         currentQuestion.answers.forEach(answer => {
