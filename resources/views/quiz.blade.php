@@ -9,6 +9,13 @@
 @section('content')
 <div class="quiz-container-bg">
     <div class="container mx-auto py-8">
+
+        {{-- Título do Quiz --}}
+        <div class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-gray-800">Quiz Interativo de Redação</h1>
+            <p class="text-gray-600 mt-2">Teste seus conhecimentos sobre estrutura, coesão e argumentação textual.</p>
+        </div>
+
         <div class="quiz-card">
             <div class="quiz-header">
                 <h2 id="question-text">Carregando pergunta...</h2>
@@ -28,6 +35,7 @@
     </div>
 </div>
 @endsection
+
 
 @push('scripts')
     <script src="{{ asset('js/quiz.js') }}"></script>
