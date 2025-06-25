@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     ProfileController,
     AssinaturaController,
+    CorrecaoController,
     SimuladoCoringaController,
     SimuladoComumController,
     RedacaoController,
@@ -48,6 +49,7 @@ Route::middleware('auth')->group(function () {
 
     // Redações (apenas resource, sem duplicidade)
     Route::resource('redacoes', RedacaoController::class);
+    Route::post('/redacoes/{id}/correcao', [CorrecaoController::class, 'resultado'])->name('redacoes.correcao');
 
     // Gráficos
     Route::get('/graficos/redacoes-por-mes', [GraficoController::class, 'redacoesPorMes'])->name('graficos.redacoes');
