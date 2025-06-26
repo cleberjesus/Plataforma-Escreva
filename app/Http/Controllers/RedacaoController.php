@@ -97,7 +97,8 @@ class RedacaoController extends Controller
 
         $redacao->save();
 
-        return redirect()->route('redacoes.index')->with('success', 'Redação atualizada com sucesso!');
+        return redirect()->route('resultado', ['redacao_id' => $redacao->id]);
+
     }
 
     public function destroy($id)

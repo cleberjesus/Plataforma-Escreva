@@ -45,13 +45,15 @@
                                         @method('DELETE')
                                         <button type="button" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-1 w-full justify-center btn-apagar" data-id="{{ $redacao->id }}"><i class="fa-solid fa-trash"></i> Apagar</button>
                                     </form>
-                                    <form id="form-avaliar-{{ $redacao->id }}" action="{{ route('redacoes.correcao', $redacao->id) }}" method="POST" class="form-avaliar">
+                                    <form action="{{ route('redacoes.correcao', $redacao->id) }}" method="POST" class="form-avaliar">
                                         @csrf
-                                        <button type="button"
-                                            class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-1 w-full justify-center btn-avaliar"
-                                            onclick="document.getElementById('form-avaliar-{{ $redacao->id }}').submit();">
+                                        <button type="submit"
+                                            class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-1 w-full justify-center btn-avaliar">
                                             <i class="fa-solid fa-check"></i> Avaliar
                                         </button>
+                                        @if ($redacao->corrigida)
+                                            <p class="mt-1 text-xs text-gray-500 text-center italic">Já corrigida</p>
+                                        @endif
                                     </form>
                                 </div>
                             </div>

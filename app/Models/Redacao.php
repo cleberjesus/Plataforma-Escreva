@@ -11,18 +11,14 @@ class Redacao extends Model
     protected $table = 'redacoes';
 
     protected $fillable = [
+        'id',
         'tema',
         'modo_envio', 
         'texto_redacao', 
         'imagem_redacao',
         'tempo_gasto',
-        'nota_comp1',
-        'nota_comp2',
-        'nota_comp3',
-        'nota_comp4',
-        'nota_comp5',
-        'nota_total',
-        'comentario',
+        'nota',
+        'feedback',
         'corrigida'
     ];
     
@@ -30,12 +26,7 @@ class Redacao extends Model
 
     protected $casts = [
         'corrigida' => 'boolean',
-        'nota_comp1' => 'decimal:1',
-        'nota_comp2' => 'decimal:1',
-        'nota_comp3' => 'decimal:1',
-        'nota_comp4' => 'decimal:1',
-        'nota_comp5' => 'decimal:1',
-        'nota_total' => 'decimal:1',
+        'nota' => 'decimal:1',
     ];
 
     public function user()

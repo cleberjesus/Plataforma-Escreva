@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function () {
     // Redações (apenas resource, sem duplicidade)
     Route::resource('redacoes', RedacaoController::class);
     Route::post('/redacoes/{id}/correcao', [CorrecaoController::class, 'resultado'])->name('redacoes.correcao');
+    Route::post('/resultado', [CorrecaoController::class, 'store'])->name('resultado.store');
 
     // Gráficos
     Route::get('/graficos/redacoes-por-mes', [GraficoController::class, 'redacoesPorMes'])->name('graficos.redacoes');

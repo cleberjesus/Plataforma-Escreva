@@ -3,92 +3,104 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Correcao;
 
 class CorrecaoController extends Controller
 {
-    public function resultado(Request $request){
-        $texto = $request->input('texto');
+    public function resultado(Request $request, $id)
+    {
+        $redacao = \App\Models\Redacao::findOrFail($id);
 
-        // 1. Gera a nota
+        if ($redacao->corrigida) {
+            return redirect()->route('redacoes.show', $id)
+                ->with('info', 'Esta redação já foi corrigida.');
+        }
+
+        $texto = $redacao->texto_redacao;
+
         $processNota = proc_open(
             'python ' . base_path('scripts/IA_TCC/inferencia.py'),
             [
                 0 => ['pipe', 'r'],
                 1 => ['pipe', 'w'],
-                2 => ['pipe', 'w'] 
+                2 => ['pipe', 'w']
             ],
             $pipesNota
         );
 
         $nota = null;
-        $notaError = null;
-        $notaReturn = null;
-
         if (is_resource($processNota)) {
             fwrite($pipesNota[0], $texto);
             fclose($pipesNota[0]);
 
-            $nota = stream_get_contents($pipesNota[1]);
+            $nota = trim(stream_get_contents($pipesNota[1]));
             fclose($pipesNota[1]);
 
             $notaError = stream_get_contents($pipesNota[2]);
             fclose($pipesNota[2]);
 
             $notaReturn = proc_close($processNota);
-
-            $nota = mb_convert_encoding($nota, 'UTF-8', 'UTF-8');
-            $nota = trim($nota);
+            if ($notaReturn !== 0) {
+                return response()->json(['erro' => 'Erro no script de nota: ' . $notaError], 500);
+            }
         }
 
-        // 2. Gera o feedback
+        // ===== INFERÊNCIA DO FEEDBACK =====
         $processFeedback = proc_open(
             'python ' . base_path('scripts/IA_analise/main.py'),
             [
                 0 => ['pipe', 'r'],
                 1 => ['pipe', 'w'],
-                2 => ['pipe', 'w'] 
+                2 => ['pipe', 'w']
             ],
             $pipesFeedback
         );
 
         $feedback = null;
-        $feedbackError = null;
-        $feedbackReturn = null;
-
         if (is_resource($processFeedback)) {
             fwrite($pipesFeedback[0], $texto);
             fclose($pipesFeedback[0]);
 
-            $feedback = stream_get_contents($pipesFeedback[1]);
+            $feedback = trim(stream_get_contents($pipesFeedback[1]));
             fclose($pipesFeedback[1]);
 
             $feedbackError = stream_get_contents($pipesFeedback[2]);
             fclose($pipesFeedback[2]);
 
             $feedbackReturn = proc_close($processFeedback);
-
-            $feedback = mb_convert_encoding($feedback, 'UTF-8', 'UTF-8');
-            $feedback = trim($feedback);
+            if ($feedbackReturn !== 0) {
+                return response()->json(['erro' => 'Erro no script de feedback: ' . $feedbackError], 500);
+            }
         }
 
-        // 3. Verifica erros e retorna resposta JSON
-        if ($notaReturn !== 0) {
-            return response()->json(['erro' => 'Erro ao executar o script de nota: ' . $notaError], 500);
-        }
-        if ($feedbackReturn !== 0) {
-            return response()->json(['erro' => 'Erro ao executar o script de feedback: ' . $feedbackError], 500);
-        }
-
-        // Decodifica o feedback JSON
         $feedbackDecoded = json_decode($feedback, true);
 
-        if (!mb_check_encoding($nota, 'UTF-8') || !mb_check_encoding($feedback, 'UTF-8')) {
-            return response()->json(['erro' => 'Saída inválida: encoding malformado'], 500);
-        }
+        $redacao->corrigida = true;
+        $redacao->save();
 
         return view('resultado', [
             'nota' => $nota,
-            'feedback' => $feedbackDecoded
+            'feedback' => $feedbackDecoded,
+            'redacao_id' => $redacao->id,
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'redacao_id' => 'required|exists:redacoes,id',
+            'nota' => 'required|integer|min:0|max:1000',
+            'feedback' => 'nullable|string',
+        ]);
+
+        $correcao = new Correcao();
+        $correcao->user_id = auth()->id();
+        $correcao->redacao_id = $request->redacao_id;
+        $correcao->nota = $request->nota;
+        $correcao->feedback = $request->feedback;
+        $correcao->data = now();
+        $correcao->save();
+
+        return response()->json(['status' => 'ok']);
     }
 }

@@ -9,13 +9,8 @@ return new class extends Migration
     public function up()
     {
         Schema::table('redacoes', function (Blueprint $table) {
-            $table->decimal('nota_comp1', 5, 1)->nullable();
-            $table->decimal('nota_comp2', 5, 1)->nullable();
-            $table->decimal('nota_comp3', 5, 1)->nullable();
-            $table->decimal('nota_comp4', 5, 1)->nullable();
-            $table->decimal('nota_comp5', 5, 1)->nullable();
-            $table->decimal('nota_total', 5, 1)->nullable();
-            $table->text('comentario')->nullable();
+            $table->integer('nota')->unsigned();
+            $table->text('feedback')->nullable();
             $table->boolean('corrigida')->default(false);
         });
     }

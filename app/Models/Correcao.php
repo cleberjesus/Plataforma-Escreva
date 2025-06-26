@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Correcao extends Model
 {
     protected $fillable = [
+        'id',
         'nota',
         'feedback',
         'user_id',

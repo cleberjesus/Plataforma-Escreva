@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('redacao_id')->constrained('redacoes')->onDelete('cascade');
             $table->integer('nota')->unsigned(); 
-            $table->text('sugestoes')->nullable();
+            $table->text('feedback')->nullable();
             $table->date('data');
             $table->timestamps();
         });
