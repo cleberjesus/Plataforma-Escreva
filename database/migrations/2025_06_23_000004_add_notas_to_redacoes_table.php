@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('redacoes', function (Blueprint $table) {
-            $table->integer('nota')->unsigned()->nullable();
+            $table->float('nota')->unsigned()->nullable();
             $table->text('feedback')->nullable();
             $table->boolean('corrigida')->default(false);
         });

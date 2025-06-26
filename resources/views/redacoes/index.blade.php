@@ -25,7 +25,7 @@
                 @else
                     <div class="flex flex-col gap-6">
                         @foreach ($redacoes as $redacao)
-                            <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-all flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                            <div class="bg-white p-10 rounded-xl shadow-md hover:shadow-lg transition-all flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                                 <div class="flex-1">
                                     <h4 class="font-bold text-xl text-gray-800 mb-2">{{ $redacao->tema }}</h4>
                                     <p class="text-gray-500 text-sm mb-2">
@@ -55,6 +55,10 @@
                                             <p class="mt-1 text-xs text-gray-500 text-center italic">Já corrigida</p>
                                         @endif
                                     </form>
+                                    @if ($redacao->corrigida)
+                                        <a href="{{ route('redacoes.resultado', $redacao->id) }}"        
+                                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-1 w-full justify-center"><i class="fa-solid fa-star"></i> Ver Correção</a>
+                                    @endif
                                 </div>
                             </div>
                         @endforeach

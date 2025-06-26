@@ -12,8 +12,8 @@ class CorrecaoController extends Controller
         $redacao = \App\Models\Redacao::findOrFail($id);
 
         if ($redacao->corrigida) {
-            return redirect()->route('redacoes.show', $id)
-                ->with('info', 'Esta redação já foi corrigida.');
+            return redirect()->route('redacoes.resultado', $id)
+            ->with('info', 'Esta redação já foi corrigida.');
         }
 
         $texto = $redacao->texto_redacao;
@@ -75,12 +75,25 @@ class CorrecaoController extends Controller
 
         $feedbackDecoded = json_decode($feedback, true);
 
+        $redacao->nota = $nota;
+        $redacao->feedback = is_array($feedbackDecoded) ? json_encode($feedbackDecoded, JSON_UNESCAPED_UNICODE) : $feedbackDecoded;
         $redacao->corrigida = true;
         $redacao->save();
 
         return view('resultado', [
             'nota' => $nota,
             'feedback' => $feedbackDecoded,
+            'redacao_id' => $redacao->id,
+        ]);
+    }
+
+    public function mostrarResultado($id)
+    {
+        $redacao = \App\Models\Redacao::findOrFail($id);
+        // Supondo que você salvou nota e feedback na Redacao
+        return view('resultado', [
+            'nota' => $redacao->nota,
+            'feedback' => json_decode($redacao->feedback, true),
             'redacao_id' => $redacao->id,
         ]);
     }
