@@ -49,12 +49,17 @@ class RegisterUserRequest extends FormRequest
     {
         return [
             'g-recaptcha-response.required' => '• Por favor, confirme que você não é um robô.',
+            'password.required' => '• O campo senha é obrigatório.',
+            'password.confirmed' => '• A confirmação da senha não confere.',
             'password.min' => '• A senha deve ter no mínimo 8 caracteres.',
-            'password.mixed_case' => '• A senha deve conter letras maiúsculas e minúsculas.',
+            'password.mixed' => '• A senha deve conter pelo menos uma letra maiúscula e uma minúscula.',
             'password.letters' => '• A senha deve conter pelo menos uma letra.',
             'password.numbers' => '• A senha deve conter pelo menos um número.',
             'password.symbols' => '• A senha deve conter pelo menos um caractere especial.',
             'password.uncompromised' => '• Essa senha já apareceu em um vazamento de dados. Escolha outra.',
+            'email.required' => '• O campo e-mail é obrigatório.',
+            'email.email' => '• O campo e-mail deve ser um endereço de e-mail válido.',
+            'email.unique' => '• Este e-mail já está cadastrado.',
         ];
     }
 }
