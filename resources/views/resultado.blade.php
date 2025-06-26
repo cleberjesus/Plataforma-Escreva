@@ -102,17 +102,4 @@
     </div>
 </div>
 
-<form id="auto-correcao-form" action="{{ route('resultado.store') }}" method="POST" style="display: none;">
-    @csrf
-    <input type="hidden" name="redacao_id" value="{{ $redacao_id }}">
-    <input type="hidden" name="nota" value="{{ $nota }}">
-    <input type="hidden" name="feedback" value="{{ json_encode($feedback) }}">
-</form>
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        document.getElementById('auto-correcao-form').submit();
-    });
-</script>
-
 @endsection
