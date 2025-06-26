@@ -57,6 +57,9 @@ class RegisterUserRequest extends FormRequest
             'password.numbers' => '• A senha deve conter pelo menos um número.',
             'password.symbols' => '• A senha deve conter pelo menos um caractere especial.',
             'password.uncompromised' => '• Essa senha já apareceu em um vazamento de dados. Escolha outra.',
+            'email.required' => '• O campo e-mail é obrigatório.',
+            'email.email' => '• O campo e-mail deve ser um endereço de e-mail válido.',
+            'email.unique' => '• Este e-mail já está cadastrado.',
         ];
     }
 }
