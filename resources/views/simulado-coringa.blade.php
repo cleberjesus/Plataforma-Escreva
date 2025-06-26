@@ -2,6 +2,7 @@
 
 @section('content')
 <div id="simulado-coringa-app" class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <audio id="audio-contagem" src="/sounds/contagem3.wav" preload="auto"></audio>
     <div class="container mx-auto px-4 py-6">
         <!-- Header -->
         <div class="mb-6">
@@ -390,10 +391,13 @@ createApp({
         iniciarContagem() {
             this.showInicioCard = false;
             this.showContagem = true;
-            
+            const audio = document.getElementById('audio-contagem');
             const contagemInterval = setInterval(() => {
+                if (audio) {
+                    audio.currentTime = 0;
+                    audio.play();
+                }
                 this.contador--;
-                
                 if (this.contador <= 0) {
                     clearInterval(contagemInterval);
                     this.showContagem = false;

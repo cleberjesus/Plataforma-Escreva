@@ -45,6 +45,9 @@ class RedacaoController extends Controller
         $redacao->data = now();
         $redacao->tema = $request->tema;
         $redacao->modo_envio = $request->modo_envio;
+        $redacao->nota = null;
+        $redacao->feedback = null;
+        $redacao->corrigida = false;
 
         if ($request->modo_envio === 'digitado') {
             $redacao->texto_redacao = $request->texto_redacao;

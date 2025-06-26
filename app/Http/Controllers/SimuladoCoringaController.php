@@ -83,6 +83,8 @@ class SimuladoCoringaController extends Controller
                 'tema' => $request->tema,
                 'modo_envio' => 'simulado_coringa',
                 'tempo_gasto' => $request->tempo_gasto,
+                'nota' => null, // Redação recém-criada não tem nota ainda
+                'feedback' => null, // Redação recém-criada não tem feedback ainda
                 'corrigida' => false
             ]);
 

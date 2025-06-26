@@ -10,18 +10,17 @@ class AssinaturaController extends Controller
     {
         return $request->user()->newSubscription('default', 'price_1RNgrQD6ZyfuoRtMFgZ7zTjs')
             ->checkout([
-        'success_url' => route('assinatura.sucesso'),
-        'cancel_url' => route('dashboard'),
-    ]);
-
+                'success_url' => route('assinatura.sucesso'),
+                'cancel_url' => route('dashboard'),
+            ]);
     }
+
     public function sucesso(Request $request)
-{
-    $user = $request->user();
-    $user->is_premium = true;
-    $user->save();
+    {
+        $user = $request->user();
+        $user->is_premium = true;
+        $user->save();
 
-    return redirect()->route('dashboard')->with('status', 'Assinatura Premium ativada com sucesso!');
-}
-
+        return redirect()->route('dashboard')->with('status', 'Assinatura Premium ativada com sucesso!');
+    }
 }

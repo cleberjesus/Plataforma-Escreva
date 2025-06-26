@@ -12,6 +12,7 @@ class Redacao extends Model
 
     protected $fillable = [
         'id',
+        'user_id',
         'tema',
         'modo_envio', 
         'texto_redacao', 
@@ -19,7 +20,8 @@ class Redacao extends Model
         'tempo_gasto',
         'nota',
         'feedback',
-        'corrigida'
+        'corrigida',
+        'data'
     ];
     
     protected $dates = ['created_at', 'updated_at'];

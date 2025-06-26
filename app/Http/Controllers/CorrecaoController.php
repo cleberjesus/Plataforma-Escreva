@@ -18,62 +18,36 @@ class CorrecaoController extends Controller
 
         $texto = $redacao->texto_redacao;
 
-        $processNota = proc_open(
-            'python ' . base_path('scripts/IA_TCC/inferencia.py'),
-            [
-                0 => ['pipe', 'r'],
-                1 => ['pipe', 'w'],
-                2 => ['pipe', 'w']
+        // Simulação de correção manual (sem IA)
+        // Nota simulada baseada no tamanho do texto
+        $nota = min(1000, max(600, strlen($texto) / 10));
+        
+        // Feedback simulado
+        $feedbackDecoded = [
+            'competencias' => [
+                'competencia1' => [
+                    'nota' => min(200, max(120, strlen($texto) / 50)),
+                    'comentario' => 'Demonstra domínio da norma culta da língua escrita.'
+                ],
+                'competencia2' => [
+                    'nota' => min(200, max(120, strlen($texto) / 50)),
+                    'comentario' => 'Compreende a proposta e aplica conceitos das várias áreas de conhecimento.'
+                ],
+                'competencia3' => [
+                    'nota' => min(200, max(120, strlen($texto) / 50)),
+                    'comentario' => 'Seleciona, relaciona, organiza e interpreta informações.'
+                ],
+                'competencia4' => [
+                    'nota' => min(200, max(120, strlen($texto) / 50)),
+                    'comentario' => 'Demonstra conhecimento dos mecanismos linguísticos necessários.'
+                ],
+                'competencia5' => [
+                    'nota' => min(200, max(120, strlen($texto) / 50)),
+                    'comentario' => 'Elabora proposta de intervenção para o problema abordado.'
+                ]
             ],
-            $pipesNota
-        );
-
-        $nota = null;
-        if (is_resource($processNota)) {
-            fwrite($pipesNota[0], $texto);
-            fclose($pipesNota[0]);
-
-            $nota = trim(stream_get_contents($pipesNota[1]));
-            fclose($pipesNota[1]);
-
-            $notaError = stream_get_contents($pipesNota[2]);
-            fclose($pipesNota[2]);
-
-            $notaReturn = proc_close($processNota);
-            if ($notaReturn !== 0) {
-                return response()->json(['erro' => 'Erro no script de nota: ' . $notaError], 500);
-            }
-        }
-
-        // ===== INFERÊNCIA DO FEEDBACK =====
-        $processFeedback = proc_open(
-            'python ' . base_path('scripts/IA_analise/main.py'),
-            [
-                0 => ['pipe', 'r'],
-                1 => ['pipe', 'w'],
-                2 => ['pipe', 'w']
-            ],
-            $pipesFeedback
-        );
-
-        $feedback = null;
-        if (is_resource($processFeedback)) {
-            fwrite($pipesFeedback[0], $texto);
-            fclose($pipesFeedback[0]);
-
-            $feedback = trim(stream_get_contents($pipesFeedback[1]));
-            fclose($pipesFeedback[1]);
-
-            $feedbackError = stream_get_contents($pipesFeedback[2]);
-            fclose($pipesFeedback[2]);
-
-            $feedbackReturn = proc_close($processFeedback);
-            if ($feedbackReturn !== 0) {
-                return response()->json(['erro' => 'Erro no script de feedback: ' . $feedbackError], 500);
-            }
-        }
-
-        $feedbackDecoded = json_decode($feedback, true);
+            'comentario_geral' => 'Redação bem estruturada com argumentação adequada ao tema proposto.'
+        ];
 
         $redacao->corrigida = true;
         $redacao->save();

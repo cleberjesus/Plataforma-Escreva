@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('redacoes', function (Blueprint $table) {
-            $table->integer('nota')->unsigned();
+            $table->integer('nota')->unsigned()->nullable();
             $table->text('feedback')->nullable();
             $table->boolean('corrigida')->default(false);
         });
@@ -19,13 +19,8 @@ return new class extends Migration
     {
         Schema::table('redacoes', function (Blueprint $table) {
             $table->dropColumn([
-                'nota_comp1',
-                'nota_comp2',
-                'nota_comp3',
-                'nota_comp4',
-                'nota_comp5',
-                'nota_total',
-                'comentario',
+                'nota',
+                'feedback',
                 'corrigida'
             ]);
         });
