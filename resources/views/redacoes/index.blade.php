@@ -45,19 +45,23 @@
                                         @method('DELETE')
                                         <button type="button" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-1 w-full justify-center btn-apagar" data-id="{{ $redacao->id }}"><i class="fa-solid fa-trash"></i> Apagar</button>
                                     </form>
-                                    <form action="{{ route('redacoes.correcao', $redacao->id) }}" method="POST" class="form-avaliar">
-                                        @csrf
-                                        <button type="submit"
-                                            class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-1 w-full justify-center btn-avaliar">
-                                            <i class="fa-solid fa-check"></i> Avaliar
-                                        </button>
-                                        @if ($redacao->corrigida)
+
+                                    @if (! $redacao->corrigida)
+                                        <form action="{{ route('redacoes.correcao', $redacao->id) }}" method="POST" class="form-avaliar">
+                                            @csrf
+                                            <button type="submit"
+                                                class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-1 w-full justify-center btn-avaliar">
+                                                <i class="fa-solid fa-check"></i> Avaliar
+                                            </button>
+                                        </form>
+                                    @else
+                                        <div class="flex flex-col items-center gap-1 w-full sm:w-auto">
+                                            <a href="{{ route('redacoes.resultado', $redacao->id) }}"
+                                               class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-1 justify-center">
+                                                <i class="fa-solid fa-star"></i> Ver Correção
+                                            </a>
                                             <p class="mt-1 text-xs text-gray-500 text-center italic">Já corrigida</p>
-                                        @endif
-                                    </form>
-                                    @if ($redacao->corrigida)
-                                        <a href="{{ route('redacoes.resultado', $redacao->id) }}"        
-                                        class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg text-sm flex items-center gap-1 w-full justify-center"><i class="fa-solid fa-star"></i> Ver Correção</a>
+                                        </div>
                                     @endif
                                 </div>
                             </div>

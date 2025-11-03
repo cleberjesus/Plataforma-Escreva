@@ -29,16 +29,16 @@
                     </div>
 
                     <div id="texto_redacao_div">
-    <label for="texto_redacao" class="block text-gray-700 mb-2 font-semibold">Texto da Redação</label>
-    <textarea
-        id="texto_redacao"
-        name="texto_redacao"
-        rows="12"
-        class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-base leading-relaxed resize-y transition"
-        placeholder="Escreva aqui sua redação. Lembre-se de organizar sua introdução, desenvolvimento e conclusão."
-    >{{ old('texto_redacao', $redacao->texto_redacao) }}</textarea>
-    <p class="text-sm text-gray-500 mt-2">Dica: organize seu texto com clareza e revise a gramática antes de salvar.</p>
-</div>
+                        <label for="texto_redacao" class="block text-gray-700 mb-2 font-semibold">Texto da Redação</label>
+                        <textarea
+                            id="texto_redacao"
+                            name="texto_redacao"
+                            rows="12"
+                            class="w-full p-4 border border-gray-300 rounded-lg bg-gray-50 focus:bg-white focus:border-blue-500 focus:ring focus:ring-blue-200 focus:ring-opacity-50 text-base leading-relaxed resize-y transition"
+                            placeholder="Escreva aqui sua redação. Lembre-se de organizar sua introdução, desenvolvimento e conclusão."
+                        >{{ old('texto_redacao', $redacao->texto_redacao) }}</textarea>
+                        <p class="text-sm text-gray-500 mt-2">Dica: organize seu texto com clareza e revise a gramática antes de salvar.</p>
+                    </div>
 
 
 

@@ -100,7 +100,7 @@ class RedacaoController extends Controller
 
         $redacao->save();
 
-        return redirect()->route('resultado', ['redacao_id' => $redacao->id]);
+        return redirect()->route('redacoes.index', ['redacao_id' => $redacao->id, 'id'=> $id]);
 
     }
 
