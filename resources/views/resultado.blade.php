@@ -70,6 +70,17 @@
     .voltar a:hover {
         text-decoration: underline;
     }
+
+    .competencia { margin-bottom: 20px; }
+    .competencia-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: #2d3748; }
+    .feedback-item {
+        background: #fbfbfd;
+        border: 1px solid #eee;
+        padding: 10px 12px;
+        border-radius: 6px;
+        margin-bottom: 8px;
+        line-height: 1.4;
+    }
 </style>
 
 <div class="container">
@@ -89,17 +100,22 @@
 
         @if(count($fb) > 0)
             @foreach($fb as $competencia => $mensagens)
-                <h3>{{ $competencia === 'Geral' ? 'Geral' : ucfirst(str_replace('_', ' ', $competencia)) }}</h3>
-                <ul>
-                    @foreach((array) $mensagens as $msg)
-                        @php
-                            $partes = explode(':', $msg, 2);
-                            $titulo = trim($partes[0] ?? '');
-                            $mensagem = trim($partes[1] ?? '');
-                        @endphp
-                        <li><strong>{{ e($titulo) }}</strong>: {{ e($mensagem) }}</li>
-                    @endforeach
-                </ul>
+                <div class="competencia">
+                    <h3 class="competencia-title">{{ $competencia === 'Geral' ? 'Geral' : ucfirst(str_replace('_', ' ', $competencia)) }}</h3>
+
+                    <div class="competencia-list">
+                        @foreach((array) $mensagens as $msg)
+                            @php
+                                $partes = explode(':', $msg, 2);
+                                $titulo = trim($partes[0] ?? '');
+                                $mensagem = trim($partes[1] ?? $msg);
+                            @endphp
+                            <div class="feedback-item">
+                                <strong>{{ e($titulo) }}</strong>@if($mensagem): @endif {{ e($mensagem) }}
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             @endforeach
         @else
             <p>Nenhum feedback gerado.</p>
