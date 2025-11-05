@@ -75,14 +75,26 @@ class CorrecaoController extends Controller
 
         $feedbackDecoded = json_decode($feedback, true);
 
+        if (is_array($feedbackDecoded)) {
+
+            if (isset($feedbackDecoded['feedback']) && is_array($feedbackDecoded['feedback'])) {
+                $normalizedFeedback = $feedbackDecoded;
+            } else {
+                $normalizedFeedback = ['feedback' => array_values($feedbackDecoded)];
+            }
+        } else {
+            $rawText = is_string($feedback) ? $feedback : (string) $feedbackDecoded;
+            $normalizedFeedback = ['feedback' => $rawText !== '' ? [$rawText] : []];
+        }
+
         $redacao->nota = $nota;
-        $redacao->feedback = is_array($feedbackDecoded) ? json_encode($feedbackDecoded, JSON_UNESCAPED_UNICODE) : $feedbackDecoded;
+        $redacao->feedback = json_encode($normalizedFeedback, JSON_UNESCAPED_UNICODE);
         $redacao->corrigida = true;
         $redacao->save();
 
         return view('resultado', [
             'nota' => $nota,
-            'feedback' => $feedbackDecoded,
+            'feedback' => $normalizedFeedback,
             'redacao_id' => $redacao->id,
         ]);
     }
@@ -90,10 +102,36 @@ class CorrecaoController extends Controller
     public function mostrarResultado($id)
     {
         $redacao = \App\Models\Redacao::findOrFail($id);
-        // Supondo que você salvou nota e feedback na Redacao
+
+        $raw = $redacao->feedback;
+
+        if (is_string($raw)) {
+            $decoded = json_decode($raw, true);
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                $feedback = $decoded;
+            } else {
+                $feedback = ['feedback' => [$raw]];
+            }
+        } elseif (is_array($raw)) {
+            $feedback = $raw;
+        } else {
+            $feedback = ['feedback' => []];
+        }
+
+        // garantia final: feedback['feedback'] é array
+        if (!isset($feedback['feedback']) || !is_array($feedback['feedback'])) {
+            $feedback = ['feedback' => is_array($feedback) ? array_values($feedback) : []];
+        }
+
+        // se for lista simples de strings indexada, transforma em seção 'Geral'
+        $fb = $feedback['feedback'];
+        if (array_values($fb) === $fb && count($fb) > 0 && is_string($fb[0])) {
+            $feedback['feedback'] = ['Geral' => $fb];
+        }
+
         return view('resultado', [
             'nota' => $redacao->nota,
-            'feedback' => json_decode($redacao->feedback, true),
+            'feedback' => $feedback,
             'redacao_id' => $redacao->id,
         ]);
     }

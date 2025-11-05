@@ -6,7 +6,6 @@
         <x-back-button />
         
         <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            // ... existing code ...
         </div>
     </div>
 </div>

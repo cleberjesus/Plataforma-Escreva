@@ -1,5 +1,4 @@
 import spacy
-
 from collections import Counter
 
 nlp = spacy.load("pt_core_news_sm")
@@ -8,39 +7,53 @@ def analisar_coesao(texto):
     feedback = []
     doc = nlp(texto)
 
-    # Análise do tamanho das frases
-    frases_longas = [sent for sent in doc.sents if len(sent) > 30]
-    if frases_longas:
-        feedback.append("Competência 4: Algumas frases estão longas demais. Considere dividi-las para facilitar a leitura e evitar que o leitor se perca. Frases mais curtas ajudam na clareza e compreensão do texto.")
+    # COMPETÊNCIA 4: Tamanho das frases
+    frases = list(doc.sents)
+    frases_longas = [sent for sent in frases if len(sent) > 30]
+    frases_curtas = [sent for sent in frases if len(sent) < 5]
+    if len(frases_longas) >= 3:
+        feedback.append("Competência 4: Há várias frases longas que dificultam a leitura. Divida em períodos menores para melhorar a clareza.")
+    elif frases_longas:
+        feedback.append("Competência 4: Algumas frases estão extensas. Considere revisar para facilitar a compreensão.")
     else:
-        feedback.append("Competência 4: Ótimo! Suas frases estão bem distribuídas, tornando o texto mais claro, objetivo e agradável de ler.")
+        feedback.append("Competência 4: Ótimo! Suas frases estão bem distribuídas, tornando o texto claro e agradável de ler.")
 
-    # Análise de repetição de palavras
+    if len(frases_curtas) >= 3:
+        feedback.append("Competência 4: Há muitas frases curtas em sequência. Isso pode prejudicar a fluidez. Tente unir ideias para formar períodos mais completos.")
+
+    # COMPETÊNCIA 4: Repetição de palavras
     palavras = [t.text.lower() for t in doc if not t.is_punct and not t.is_stop]
     contagem = Counter(palavras)
     repetidas = [p for p, freq in contagem.items() if freq > 4]
     if repetidas:
-        feedback.append(f"Competência 4: Evite repetição excessiva de palavras como: {', '.join(repetidas[:3])}. Procure utilizar sinônimos e variar o vocabulário para enriquecer o texto e evitar monotonia.")
+        feedback.append(f"Competência 4: Evite repetição excessiva de palavras como: {', '.join(repetidas[:3])}. Use sinônimos para enriquecer o vocabulário.")
+    elif any(freq > 2 for freq in contagem.values()):
+        feedback.append("Competência 4: Há algumas repetições de palavras. Tente variar o vocabulário para evitar monotonia.")
     else:
-        feedback.append("Competência 4: Muito bom! Não há repetição excessiva de palavras, o que demonstra riqueza vocabular e contribui para a qualidade do texto.")
+        feedback.append("Competência 4: Muito bom! Não há repetição excessiva, o que demonstra riqueza vocabular.")
 
-    # Análise de conectivos
+    # COMPETÊNCIA 4: Conectivos
     conectivos = {
-        "portanto", "contudo", "entretanto", "além disso", "porém", "logo", "ou seja", "assim", "dessa forma", "todavia", "no entanto", "consequentemente", "por conseguinte"
+        "portanto", "contudo", "entretanto", "além disso", "porém", "logo", "ou seja", "assim",
+        "dessa forma", "todavia", "no entanto", "consequentemente", "por conseguinte", "por outro lado"
     }
     usados = set(t.text.lower() for t in doc if t.text.lower() in conectivos)
-    if len(usados) == 0:
-        feedback.append("Competência 4: Não foram encontrados conectivos no texto. O uso de conectivos é fundamental para garantir a coesão e a ligação lógica entre as ideias. Procure inserir conectivos variados ao longo dos parágrafos.")
-    elif len(usados) < 2:
-        feedback.append("Competência 4: Poucos conectivos encontrados. Varie e utilize mais conectivos para melhorar a coesão e a fluidez entre as ideias e parágrafos.")
+    if len(usados) >= 4:
+        feedback.append("Competência 4: Excelente uso de conectivos! Isso garante coesão, fluidez e progressão lógica entre as ideias.")
+    elif 2 <= len(usados) < 4:
+        feedback.append("Competência 4: Bom uso de conectivos, mas você pode variar mais para enriquecer a coesão textual.")
+    elif len(usados) == 1:
+        feedback.append("Competência 4: Poucos conectivos encontrados. Varie e utilize mais conectivos para melhorar a fluidez entre as ideias.")
     else:
-        feedback.append("Competência 4: Excelente uso de conectivos! Isso garante coesão, fluidez e uma progressão lógica entre as ideias do texto.")
+        feedback.append("Competência 4: Não foram encontrados conectivos no texto. O uso de conectivos é essencial para garantir coesão e lógica entre as ideias.")
 
-    # Análise de referência pronominal
+    # COMPETÊNCIA 4: Pronomes
     pronomes = [t.text.lower() for t in doc if t.pos_ == "PRON"]
-    if len(pronomes) < 3:
-        feedback.append("Competência 4: Pouco uso de pronomes. O uso adequado de pronomes pode evitar repetições e tornar o texto mais coeso.")
+    if len(pronomes) >= 6:
+        feedback.append("Competência 4: Excelente uso de pronomes! Isso contribui para evitar repetições e garantir coesão referencial.")
+    elif 3 <= len(pronomes) < 6:
+        feedback.append("Competência 4: Bom uso de pronomes, o que ajuda na coesão textual.")
     else:
-        feedback.append("Competência 4: Bom uso de pronomes, o que contribui para evitar repetições e garantir coesão referencial.")
+        feedback.append("Competência 4: Pouco uso de pronomes. Eles ajudam a evitar repetições e manter a coesão referencial.")
 
     return feedback

@@ -77,25 +77,30 @@
     <title>Resultado da Redação</title>
 
     <div class="nota">
-        Nota: <strong>{{ e($nota) }}/1000</strong>
+        Nota: <strong>{{ number_format($nota ?? 0, 2, ',', '.') }}/1000</strong>
     </div>
 
     <div class="feedback">
         <h2>Feedbacks</h2>
-        @if(isset($feedback['feedback']) && is_array($feedback['feedback']) && count($feedback['feedback']) > 0)
-            <ul>
-                @foreach($feedback['feedback'] as $item)
-                    @php
-                        $partes = explode(':', $item, 2);
-                        $titulo = trim($partes[0] ?? '');
-                        $mensagem = trim($partes[1] ?? '');
-                    @endphp
 
-                    <li>
-                        <strong>{{ $titulo }}</strong>: {{ $mensagem }}
-                    </li>
-                @endforeach
-            </ul>
+        @php
+            $fb = is_array($feedback) ? $feedback['feedback'] ?? [] : [];
+        @endphp
+
+        @if(count($fb) > 0)
+            @foreach($fb as $competencia => $mensagens)
+                <h3>{{ $competencia === 'Geral' ? 'Geral' : ucfirst(str_replace('_', ' ', $competencia)) }}</h3>
+                <ul>
+                    @foreach((array) $mensagens as $msg)
+                        @php
+                            $partes = explode(':', $msg, 2);
+                            $titulo = trim($partes[0] ?? '');
+                            $mensagem = trim($partes[1] ?? '');
+                        @endphp
+                        <li><strong>{{ e($titulo) }}</strong>: {{ e($mensagem) }}</li>
+                    @endforeach
+                </ul>
+            @endforeach
         @else
             <p>Nenhum feedback gerado.</p>
         @endif
