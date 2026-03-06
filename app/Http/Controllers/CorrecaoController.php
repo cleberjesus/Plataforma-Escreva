@@ -87,6 +87,16 @@ class CorrecaoController extends Controller
             $normalizedFeedback = ['feedback' => $rawText !== '' ? [$rawText] : []];
         }
 
+        if (isset($normalizedFeedback['feedback']) && is_array($normalizedFeedback['feedback'])) {
+            uksort($normalizedFeedback['feedback'], function($a, $b) {
+                if (strtolower($a) === 'geral') return -1;
+                if (strtolower($b) === 'geral') return 1;
+                preg_match('/\d+/', $a, $ma); $na = $ma[0] ?? PHP_INT_MAX;
+                preg_match('/\d+/', $b, $mb); $nb = $mb[0] ?? PHP_INT_MAX;
+                return $na <=> $nb;
+            });
+        }
+
         $redacao->nota = $nota;
         $redacao->feedback = json_encode($normalizedFeedback, JSON_UNESCAPED_UNICODE);
         $redacao->corrigida = true;

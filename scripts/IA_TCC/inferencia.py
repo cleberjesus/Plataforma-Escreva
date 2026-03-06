@@ -14,8 +14,8 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__)))
 
 CAMINHO_REDACOES = os.path.join(BASE_DIR, 'dados', 'treino', 'redacoes.csv')
 CAMINHO_NOTAS = os.path.join(BASE_DIR, 'dados', 'treino', 'notas.csv')
-vocab_path = os.path.join(BASE_DIR, 'resultados', 'checkpoints', 'vocab.pkl')
-modelo_path = os.path.join(BASE_DIR, 'resultados', 'checkpoints', 'modelo_treinado.pth')
+vocab_path = os.path.join(BASE_DIR, 'src', 'resultados', 'checkpoints', 'vocab.pkl')
+modelo_path = os.path.join(BASE_DIR, 'src', 'resultados', 'checkpoints', 'modelo_treinado.pth')
                 
 with open(vocab_path, "rb") as f:
     vocab = pickle.load(f)
